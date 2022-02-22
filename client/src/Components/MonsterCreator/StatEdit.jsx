@@ -11,7 +11,7 @@ const StatEdit = (props) => {
     <table>
       <thead>
         <tr>
-          <th></th>
+          <th style={{width: "200px"}}></th>
           <th> 
             <button type="button" onClick={() => handleClick("increase")}>Increase Stat</button>
           </th>
@@ -19,8 +19,8 @@ const StatEdit = (props) => {
       </thead>
       <tbody>
         <tr>
-          <td>{props.parameter}</td>
-          <td>{props.stats[props.parameter]}</td>
+          <td>{props.parameter[0].toUpperCase() + props.parameter.substring(1)}</td>
+          <td style={{textAlign: "center"}}>{props.stats[props.parameter]}</td>
         </tr>
         <tr>
           <td></td>

@@ -3,74 +3,67 @@ import { useEffect } from "react";
 import NameEdit from "./NameEdit";
 import StatEdit from "./StatEdit";
 import { useFormik, Formik } from "formik";
-
-const NAME_OF_UPLOAD_PRESET = "project4Monsters";
-const YOUR_CLOUDINARY_ID = "djtovzgnc";
+import ImageUpload from "./ImageUpload";
+import axios from "axios";
+import * as Yup from "yup";
 
 const MonsterCreator = () => {
-  const [availablePoints, setAvailablePoints] = useState();
   const [monsterStats, setMonsterStats] = useState({
-    name: "",
     imagePath: "",
+    name: "",
     hp: 10,
     attack: 15,
     defense: 20,
   });
-  const [displayedImage, setDisplayedImage] = useState(
-    "https://image.flaticon.com/icons/png/128/109/109612.png"
-  );
-  const [formData, setFormData] = useState({
-    // ...other fields
-    img: "",
+
+  const validateSchema = Yup.object().shape({
+    imagePath: Yup.string().required("Please upload an image."),
+    name: Yup.string().required("Please give your monster a name!"),
   });
-  const [uploadingImg, setUploadingImg] = useState(false);
 
   const formik = useFormik({
     initialValues: monsterStats,
+    validationSchema: validateSchema,
     onSubmit: async (values) => {
       console.log("submitted values: ", values);
+      axios({
+        method: "post",
+        url: "/api/monster/new",
+        data: values,
+      }).then((response) => {
+        console.log(response);
+        if (response.data.status === "not ok") {
+          console.log("Error before submitting:" + response.data.message);
+          // const newMsg =
+          //   response.data.message.charAt(0).toUpperCase() +
+          //   response.data.message.slice(1);
+          // setMessage(newMsg);
+        } else {
+          const result = response.data.data;
+          let monster = {
+            imagePath: "",
+            name: "",
+            hp: 0,
+            attack: 0,
+            defense: 0,
+          };
+          console.log(result);
+          monster = {
+            ...monster,
+            imagePath: "",
+            name: "",
+            hp: 0,
+            attack: 0,
+            defense: 0,
+          };
+          console.log(monster);
+          // navigate(`../${userContext.username}/posts/${result._id}`, {
+          //   replace: false,
+          // });
+        }
+      });
     },
   });
-
-  useEffect(() => {
-    const test = () => {
-      console.log(monsterStats.hp);
-      setMonsterStats((prevState) => ({ ...prevState, hp: 10 }));
-      console.log(monsterStats);
-    };
-    test();
-  }, []);
-
-  const uploadImage = async (file) => {
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", NAME_OF_UPLOAD_PRESET);
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${YOUR_CLOUDINARY_ID}/image/upload`,
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const img = await res.json();
-    setDisplayedImage(img.secure_url);
-    formik.setFieldValue("imagePath", img.secure_url);
-    console.log(img);
-    return img.secure_url;
-  };
-
-  const handleFileChange = async (event) => {
-    const [file] = event.target.files;
-    if (!file) return;
-
-    setUploadingImg(true);
-    setDisplayedImage(
-      "https://res.cloudinary.com/djtovzgnc/image/upload/v1644945448/project3/fihn2qjb7r3lt4dq0jxu.gif"
-    );
-    const uploadedUrl = await uploadImage(file);
-    setFormData({ ...formData, img: uploadedUrl });
-    setUploadingImg(false);
-  };
 
   const setHp = (type) => {
     const increaseFormikValue = (prevState) => prevState + 10;
@@ -146,7 +139,7 @@ const MonsterCreator = () => {
     <>
       <form onSubmit={formik.handleSubmit}>
         <div>MonsterCreator</div>
-        <div>
+        {/* <div>
           <img src={displayedImage} className="max-h-56" />
           <input
             className="input"
@@ -156,7 +149,8 @@ const MonsterCreator = () => {
             disabled={uploadingImg}
             error={formik.touched?.description && formik.errors?.imgPath}
           />
-        </div>
+        </div> */}
+        <ImageUpload formik={formik} />
         <NameEdit handleChange={formik.handleChange} />
         {statEditMap}
 
