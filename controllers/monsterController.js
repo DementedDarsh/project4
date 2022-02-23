@@ -20,7 +20,7 @@ router.post("/new", async (req, res) => {
     const createdNewMonster = await Monster.create(newMonster);
     res.status(200).json({
       status: "ok",
-      message: "create new image post",
+      message: "created new monster",
       data: createdNewMonster,
     });
   } catch (error) {

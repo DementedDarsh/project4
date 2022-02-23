@@ -25,7 +25,7 @@ const ImageUpload = (props) => {
     );
     const img = await res.json();
     setDisplayedImage(img.secure_url);
-    props.formik.setFieldValue("imagePath", img.secure_url);
+    props.formik.setFieldValue(props.name, img.secure_url);
     console.log(img);
     return img.secure_url;
   };
@@ -45,7 +45,8 @@ const ImageUpload = (props) => {
 
   return (
     <div>
-      <img src={displayedImage} className="max-h-56" />
+      <img src={displayedImage} style={{ height: "200px", width: "200px", overflow: "hidden", objectFit: "cover"}}/>
+      <br/>
       <input
         className="input"
         type="file"

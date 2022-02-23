@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import NameEdit from "./NameEdit";
-import StatEdit from "./StatEdit";
+import NameEdit from "../SharedComponents/NameEdit";
+import StatEdit from "../SharedComponents/StatEdit";
 import { useFormik, Formik } from "formik";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
 
 const MonsterCreator = () => {
+//DEFINING VARIABLES
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
   const minimumMonsterStats = {
     imagePath: "",
@@ -19,11 +19,12 @@ const MonsterCreator = () => {
   };
   const [monsterStats, setMonsterStats] = useState(minimumMonsterStats);
 
+//VALIDATION
   const validateSchema = Yup.object().shape({
     imagePath: Yup.string().required("Please upload an image."),
     name: Yup.string().required("Please give your monster a name!"),
   });
-
+// FORM SUBMIT
   const formik = useFormik({
     initialValues: monsterStats,
     validationSchema: validateSchema,
@@ -70,6 +71,7 @@ const MonsterCreator = () => {
     },
   });
 
+//STAT FUNCTIONS
   const setHp = (type) => {
     const increaseFormikValue = (prevState) => prevState + 50;
     const decreaseFormikValue = (prevState) => prevState - 50;
@@ -180,22 +182,10 @@ const MonsterCreator = () => {
     <>
       <form onSubmit={formik.handleSubmit}>
         <div>MonsterCreator</div>
-        <div>{availableStatPoints}</div>
-        {/* <div>
-          <img src={displayedImage} className="max-h-56" />
-          <input
-            className="input"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            disabled={uploadingImg}
-            error={formik.touched?.description && formik.errors?.imgPath}
-          />
-        </div> */}
-        <ImageUpload formik={formik} />
+        <ImageUpload formik={formik} name={"imagePath"}/>
         <NameEdit handleChange={formik.handleChange} />
+        <span>{availableStatPoints}</span>
         {statEditMap}
-
         <button type="submit" disabled={availableStatPoints > 0}>Submit</button>
       </form>
     </>
