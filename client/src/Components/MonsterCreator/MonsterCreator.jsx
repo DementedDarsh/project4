@@ -8,13 +8,16 @@ import axios from "axios";
 import * as Yup from "yup";
 
 const MonsterCreator = () => {
-  const [monsterStats, setMonsterStats] = useState({
+  const [availableStatPoints, setAvailableStatPoints] = useState(20);
+  const minimumMonsterStats = {
     imagePath: "",
     name: "",
-    hp: 10,
-    attack: 15,
-    defense: 20,
-  });
+    hp: 50,
+    attack: 10,
+    defense: 10,
+    killCount: 0,
+  };
+  const [monsterStats, setMonsterStats] = useState(minimumMonsterStats);
 
   const validateSchema = Yup.object().shape({
     imagePath: Yup.string().required("Please upload an image."),
@@ -46,6 +49,7 @@ const MonsterCreator = () => {
             hp: 0,
             attack: 0,
             defense: 0,
+            killCount:0,
           };
           console.log(result);
           monster = {
@@ -55,6 +59,7 @@ const MonsterCreator = () => {
             hp: 0,
             attack: 0,
             defense: 0,
+            killCount:0,
           };
           console.log(monster);
           // navigate(`../${userContext.username}/posts/${result._id}`, {
@@ -66,14 +71,28 @@ const MonsterCreator = () => {
   });
 
   const setHp = (type) => {
-    const increaseFormikValue = (prevState) => prevState + 10;
-    const decreaseFormikValue = (prevState) => prevState - 10;
+    const increaseFormikValue = (prevState) => prevState + 50;
+    const decreaseFormikValue = (prevState) => prevState - 50;
     if (type === "increase") {
-      setMonsterStats((prevState) => ({ ...prevState, hp: prevState.hp + 10 }));
-      formik.setFieldValue("hp", increaseFormikValue(monsterStats.hp));
+      if (availableStatPoints >= 1) {
+        setMonsterStats((prevState) => ({
+          ...prevState,
+          hp: prevState.hp + 50,
+        }));
+        formik.setFieldValue("hp", increaseFormikValue(monsterStats.hp));
+        setAvailableStatPoints((prevState) => prevState - 1);
+      }
     } else if (type === "decrease") {
-      setMonsterStats((prevState) => ({ ...prevState, hp: prevState.hp - 10 }));
-      formik.setFieldValue("hp", decreaseFormikValue(monsterStats.hp));
+      if (monsterStats.hp > minimumMonsterStats.hp) {
+        setMonsterStats((prevState) => ({
+          ...prevState,
+          hp: prevState.hp - 50,
+        }));
+        formik.setFieldValue("hp", decreaseFormikValue(monsterStats.hp));
+        setAvailableStatPoints((prevState) => prevState + 1);
+      } else {
+        console.log(minimumMonsterStats);
+      }
     }
   };
 
@@ -81,40 +100,62 @@ const MonsterCreator = () => {
     const increaseFormikValue = (prevState) => prevState + 10;
     const decreaseFormikValue = (prevState) => prevState - 10;
     if (type === "increase") {
-      setMonsterStats((prevState) => ({
-        ...prevState,
-        attack: prevState.attack + 10,
-      }));
-      formik.setFieldValue("attack", increaseFormikValue(monsterStats.attack));
+      if (availableStatPoints >= 1) {
+        setMonsterStats((prevState) => ({
+          ...prevState,
+          attack: prevState.attack + 10,
+        }));
+        formik.setFieldValue(
+          "attack",
+          increaseFormikValue(monsterStats.attack)
+        );
+        setAvailableStatPoints((prevState) => prevState - 1);
+      }
     } else if (type === "decrease") {
-      setMonsterStats((prevState) => ({
-        ...prevState,
-        attack: prevState.attack - 10,
-      }));
-      formik.setFieldValue("attack", decreaseFormikValue(monsterStats.attack));
+      if (monsterStats.attack > minimumMonsterStats.attack) {
+        setMonsterStats((prevState) => ({
+          ...prevState,
+          attack: prevState.attack - 10,
+        }));
+        formik.setFieldValue(
+          "attack",
+          decreaseFormikValue(monsterStats.attack)
+        );
+        setAvailableStatPoints((prevState) => prevState + 1);
+      } else {
+        console.log(minimumMonsterStats);
+      }
     }
   };
   const setDef = (type) => {
     const increaseFormikValue = (prevState) => prevState + 10;
     const decreaseFormikValue = (prevState) => prevState - 10;
     if (type === "increase") {
-      setMonsterStats((prevState) => ({
-        ...prevState,
-        defense: prevState.defense + 10,
-      }));
-      formik.setFieldValue(
-        "defense",
-        increaseFormikValue(monsterStats.defense)
-      );
+      if (availableStatPoints >= 1) {
+        setMonsterStats((prevState) => ({
+          ...prevState,
+          defense: prevState.defense + 10,
+        }));
+        formik.setFieldValue(
+          "defense",
+          increaseFormikValue(monsterStats.defense)
+        );
+        setAvailableStatPoints((prevState) => prevState - 1);
+      }
     } else if (type === "decrease") {
-      setMonsterStats((prevState) => ({
-        ...prevState,
-        defense: prevState.defense - 10,
-      }));
-      formik.setFieldValue(
-        "defense",
-        decreaseFormikValue(monsterStats.defense)
-      );
+      if (monsterStats.defense > minimumMonsterStats.defense) {
+        setMonsterStats((prevState) => ({
+          ...prevState,
+          defense: prevState.defense - 10,
+        }));
+        formik.setFieldValue(
+          "defense",
+          decreaseFormikValue(monsterStats.defense)
+        );
+        setAvailableStatPoints((prevState) => prevState + 1);
+      } else {
+        console.log(minimumMonsterStats);
+      }
     }
   };
 
@@ -139,6 +180,7 @@ const MonsterCreator = () => {
     <>
       <form onSubmit={formik.handleSubmit}>
         <div>MonsterCreator</div>
+        <div>{availableStatPoints}</div>
         {/* <div>
           <img src={displayedImage} className="max-h-56" />
           <input
@@ -154,7 +196,7 @@ const MonsterCreator = () => {
         <NameEdit handleChange={formik.handleChange} />
         {statEditMap}
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={availableStatPoints > 0}>Submit</button>
       </form>
     </>
   );

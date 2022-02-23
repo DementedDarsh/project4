@@ -23,7 +23,7 @@ const StatEdit = (props) => {
           <td style={{textAlign: "center"}}>{props.stats[props.parameter]}</td>
         </tr>
         <tr>
-          <td></td>
+          <td style={{fontStyle: "italic", fontSize: "10px"}}>{props.parameter === "hp" ? `Each stat point increases HP by 50 points` : `Each stat point increases ${props.parameter} by 10 points`}</td>
           <td>
             <button type="button" onClick={() => handleClick("decrease")}>Decrease Stat</button>
           </td>
