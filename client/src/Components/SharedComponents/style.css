@@ -1,23 +1,32 @@
 span.square{
 	background: #0266a8; 
-  background: -webkit-linear-gradient(#EC0E0E 0%, #C70909 100%);
-  background: -o-linear-gradient(#EC0E0E 0%, #C70909 100%);
-  background-image: -webkit-linear-gradient(#EC0E0E 0%, #C70909 100%);
-  background-image: -o-linear-gradient(#EC0E0E 0%, #C70909 100%);
-  background-image: linear-gradient(#EC0E0E 0%, #C70909 100%);
+  background: -webkit-linear-gradient(#e52b2b 0%, #8b0000 100%);
+  background: -o-linear-gradient(#e52b2b 0%, #8b0000 100%);
+  background-image: -webkit-linear-gradient(#e52b2b 0%, #8b0000 100%);
+  background-image: -o-linear-gradient(#e52b2b 0%, #8b0000 100%);
+  background-image: linear-gradient(#e52b2b 0%, #8b0000 100%);
 	border-radius:5px;
-border:2px solid #ffb000;
+  border-top: 3px #ffb000;
+  border-left: 3px groove #ffb000;
+  border-right: 3px ridge #ffb000;
+  border-bottom: 3px ridge #ffb000;
 	display:inline-block;
-  height:28px;
-	width:28px;
+  height:25px;
+	width:25px;
 }
 .arrow{
   position:relative;
 }
+
+.arrow:active {
+  border-top: 3px groove #ffb000;
+  height: 22px;
+}
+
 .arrow.up:after{
   position:absolute;
   top:9px;
-  left:7px;
+  left:6px;
   width: 0;
 	height: 0;
   content:'';
@@ -29,8 +38,8 @@ border:2px solid #ffb000;
 
 .arrow.up:before{
   position:absolute;
-  top:11px;
-  left:7px;
+  top:10px;
+  left:6px;
   width: 0;
 	height: 0;
   content:'';
@@ -43,7 +52,7 @@ border:2px solid #ffb000;
 .arrow.down:after{
    position:absolute;
   top:10px;
-  left:7px;
+  left:6px;
   width: 0;
 	height: 0;
   content:'';
@@ -55,8 +64,8 @@ border:2px solid #ffb000;
 
 .arrow.down:before{
    position:absolute;
-  top:12px;
-  left:7px;
+  top:11px;
+  left:6px;
   width: 0;
 	height: 0;
   content:'';
@@ -69,4 +78,38 @@ border:2px solid #ffb000;
 div{
   height:100%;
   width:100%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.imageUploadButton {
+  width: 250px;
+  letter-spacing: 2px;
+  border-radius: 3px;
+  font-family: "Skranji", cursive;
+  color: #ffc000;
+  font-size: 13px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+  text-align: center;
+  padding: 2px 2px;
+  background: radial-gradient(circle, #8b0000, #8b0000);
+  border-top: 2px ridge #ffb000;
+  border-left: 2px groove #ffb000;
+  border-right: 2px ridge #ffb000;
+  border-bottom: 2px groove #ffb000;
+  box-shadow: inset 0px 0px 5px 3px rgba(1, 1, 1, 0.3);
+  position: relative;
+}
+
+.imageUploadButton:hover {
+  background: radial-gradient(circle, #e52b2b, #8b0000);
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+.imageUploadButton:active {
+  background: radial-gradient(circle, #ec6a6a, #e52b2b);
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
 }

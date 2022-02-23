@@ -45,8 +45,18 @@ const ImageUpload = (props) => {
 
   return (
     <div>
-      <img src={displayedImage} style={{ height: "200px", width: "200px", overflow: "hidden", objectFit: "cover"}}/>
-      <br/>
+      <img
+        src={displayedImage}
+        style={{
+          height: "200px",
+          width: "200px",
+          overflow: "hidden",
+          objectFit: "cover",
+        }}
+      />
+      <br />
+      <label className="imageUploadButton">
+        Upload Image
       <input
         className="input"
         type="file"
@@ -56,7 +66,7 @@ const ImageUpload = (props) => {
         error={
           props.formik.touched?.description && props.formik.errors?.imgPath
         }
-      />
+      /></label>
     </div>
   );
 };

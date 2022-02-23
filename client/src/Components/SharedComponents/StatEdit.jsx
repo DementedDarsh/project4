@@ -23,7 +23,7 @@ const StatEdit = (props) => {
       <thead>
         <tr>
           <th style={{ width: "400px" }}></th>
-          <th>
+          <th style={{ width: "200px", textAlign: "center" }}>
             <span
               className="icon square arrow up"
               onClick={() => handleClick("increase")}
@@ -44,7 +44,7 @@ const StatEdit = (props) => {
           <td style={{ fontStyle: "italic", fontSize: "10px" }}>
               {testOb[props.parameter]}
           </td>
-          <td>
+          <td style={{ width: "200px", textAlign: "center" }}>
             <span
               className="icon square arrow down"
               onClick={() => handleClick("decrease")}
