@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 // const postImage = require("./postImagesModel");
 
 const weaponSchema = Schema({
-  iconPath: { type: String, required: true },
+  imagePath: { type: String, required: true },
   name: { type: String, required: true },
   weaponDamage: { type: Number, required: true },
   attackSpeed: { type: Number, required: true },    

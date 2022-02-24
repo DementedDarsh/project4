@@ -2,6 +2,23 @@ const express = require("express");
 const router = express.Router();
 const Monster = require("../models/monsterModel");
 
+
+
+// READ - get all monsters
+//* get all images
+
+router.get("/monsters", async (req, res) => {
+    try {
+      const monsters = await Monster.find({});
+      res
+        .status(200)
+        .json({ status: "ok", message: "Get Monsters", data: monsters });
+    } catch (error) {
+      res.json({ status: "not ok", message: error.message });
+    }
+  });
+
+
 // CREATE - post new monster
 router.post("/new", async (req, res) => {
   const newMonster = {

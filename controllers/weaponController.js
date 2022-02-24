@@ -5,14 +5,14 @@ const Weapon = require("../models/weaponModel")
 // CREATE - post new weapon
 router.post("/new", async (req, res) => {
   const newWeapon = {
-    iconPath: req.body.iconPath,
+    imagePath: req.body.imagePath,
     name: req.body.name,
     weaponDamage: req.body.weaponDamage,
     attackSpeed: req.body.attackSpeed,
     critRate: req.body.critRate,
     hitRate: req.body.hitRate,
   };
-  if (!newWeapon.iconPath) {
+  if (!newWeapon.imagePath) {
     res
       .status(400)
       .json({ status: "not ok", message: "Please upload an image" });
