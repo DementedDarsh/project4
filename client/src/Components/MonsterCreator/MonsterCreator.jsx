@@ -1,3 +1,4 @@
+import "./style.css";
 import React, { useState } from "react";
 import NameEdit from "../SharedComponents/NameEdit";
 import StatEdit from "../SharedComponents/StatEdit";
@@ -7,7 +8,7 @@ import axios from "axios";
 import * as Yup from "yup";
 
 const MonsterCreator = () => {
-//DEFINING VARIABLES
+  //DEFINING VARIABLES
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
   const minimumMonsterStats = {
     imagePath: "",
@@ -19,12 +20,12 @@ const MonsterCreator = () => {
   };
   const [monsterStats, setMonsterStats] = useState(minimumMonsterStats);
 
-//VALIDATION
+  //VALIDATION
   const validateSchema = Yup.object().shape({
     imagePath: Yup.string().required("Please upload an image."),
     name: Yup.string().required("Please give your monster a name!"),
   });
-// FORM SUBMIT
+  // FORM SUBMIT
   const formik = useFormik({
     initialValues: monsterStats,
     validationSchema: validateSchema,
@@ -50,7 +51,7 @@ const MonsterCreator = () => {
             hp: 0,
             attack: 0,
             defense: 0,
-            killCount:0,
+            killCount: 0,
           };
           console.log(result);
           monster = {
@@ -60,7 +61,7 @@ const MonsterCreator = () => {
             hp: 0,
             attack: 0,
             defense: 0,
-            killCount:0,
+            killCount: 0,
           };
           console.log(monster);
           // navigate(`../${userContext.username}/posts/${result._id}`, {
@@ -71,7 +72,7 @@ const MonsterCreator = () => {
     },
   });
 
-//STAT FUNCTIONS
+  //STAT FUNCTIONS
   const setHp = (type) => {
     const increaseFormikValue = (prevState) => prevState + 50;
     const decreaseFormikValue = (prevState) => prevState - 50;
@@ -169,25 +170,67 @@ const MonsterCreator = () => {
 
   const statEditMap = stats.map((item) => {
     return (
-      <StatEdit
-        key={item.name}
-        stats={monsterStats}
-        parameter={item.name}
-        setStats={item.set}
-      />
+      <tr key={item.name}>
+        <td>
+          <StatEdit
+            stats={monsterStats}
+            parameter={item.name}
+            setStats={item.set}
+          />
+        </td>
+      </tr>
     );
   });
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <table style={{ marginLeft: "50px", marginTop: "30px"}}>
+        <thead>
+          <tr>
+            <th>
+              <p style={{fontSize: "40px", marginTop: "85px"}}>Create a monster!</p>
+              <div style={{marginTop: "80px", textAlign: "left"}}><NameEdit handleChange={formik.handleChange} /></div>
+            </th>
+            <th>
+              <ImageUpload formik={formik} name={"imagePath"} />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {" "}
+              <table>
+                <tbody>{statEditMap}</tbody>
+              </table>
+            </td>
+            <td style={{ textAlign: "center" }}>
+              <div className="statPoints" style={{marginTop: "130px", fontSize: "40px"}}><p style={{fontSize: "15px", marginTop: "5px", marginBottom: "-8px"}}>Stat Points: </p>{availableStatPoints}</div>
+              <div style={{marginTop: "140px"}}>
+              <form onSubmit={formik.handleSubmit}><button
+                  type="submit"
+                  className="buttonSubmit"
+                  disabled={availableStatPoints > 0}
+                >
+                  Submit
+                </button></form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {/* <form onSubmit={formik.handleSubmit}>
         <div>MonsterCreator</div>
-        <ImageUpload formik={formik} name={"imagePath"}/>
+        <ImageUpload formik={formik} name={"imagePath"} />
         <NameEdit handleChange={formik.handleChange} />
         <span>{availableStatPoints}</span>
-        {statEditMap}
-        <button type="submit" disabled={availableStatPoints > 0}>Submit</button>
-      </form>
+        <table>
+          <tbody>{statEditMap}</tbody>
+        </table>
+        <button type="submit" disabled={availableStatPoints > 0}>
+          Submit
+        </button>
+      </form> */}
     </>
   );
 };

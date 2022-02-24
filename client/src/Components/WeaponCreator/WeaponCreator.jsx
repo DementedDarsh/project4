@@ -1,3 +1,4 @@
+import "./style.css";
 import React, { useState } from "react";
 import NameEdit from "../SharedComponents/NameEdit";
 import StatEdit from "../SharedComponents/StatEdit";
@@ -217,7 +218,44 @@ const WeaponCreator = () => {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+          <table style={{ marginLeft: "50px", marginTop: "30px"}}>
+        <thead>
+          <tr>
+            <th>
+              <p style={{fontSize: "40px", marginTop: "85px"}}>Create a weapon!</p>
+              <div style={{marginTop: "80px", textAlign: "left"}}><NameEdit handleChange={formik.handleChange} /></div>
+            </th>
+            <th>
+              <ImageUpload formik={formik} name={"imagePath"} />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {" "}
+              <table>
+                <tbody>{statEditMap}</tbody>
+              </table>
+            </td>
+            <td style={{ textAlign: "center" }}>
+              <div className="statPoints" style={{marginTop: "180px", fontSize: "40px"}}><p style={{fontSize: "15px", marginTop: "5px", marginBottom: "-8px"}}>Stat Points: </p>{availableStatPoints}</div>
+              <div style={{marginTop: "150px"}}>
+              <form onSubmit={formik.handleSubmit}>
+                <button
+                  type="submit"
+                  className="buttonSubmit"
+                  disabled={availableStatPoints > 0}
+                >
+                  Submit
+                </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {/* <form onSubmit={formik.handleSubmit}>
         <ImageUpload formik={formik} name={"iconPath"} />
         <NameEdit handleChange={formik.handleChange} />
         <span>{availableStatPoints}</span>
@@ -225,7 +263,7 @@ const WeaponCreator = () => {
         <button type="submit" disabled={availableStatPoints > 0} onClick={formik.handleSubmit}>
           Submit
         </button>
-      </form>
+      </form> */}
     </>
   );
 };

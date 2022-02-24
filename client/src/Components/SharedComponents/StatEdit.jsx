@@ -22,7 +22,7 @@ const StatEdit = (props) => {
     <table>
       <thead>
         <tr>
-          <th style={{ width: "400px" }}></th>
+          <th style={{ width: "300px" }}></th>
           <th style={{ width: "200px", textAlign: "center" }}>
             <span
               className="icon square arrow up"

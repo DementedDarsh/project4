@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const NAME_OF_UPLOAD_PRESET = "project4Monsters";
+const NAME_OF_UPLOAD_PRESET = "project4";
 const YOUR_CLOUDINARY_ID = "djtovzgnc";
 
 const ImageUpload = (props) => {
@@ -45,7 +45,7 @@ const ImageUpload = (props) => {
 
   return (
     <div>
-      <img
+      <img className="preview"
         src={displayedImage}
         style={{
           height: "200px",

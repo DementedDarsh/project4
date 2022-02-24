@@ -1,21 +1,21 @@
-span.square{
-	background: #0266a8; 
+span.square {
+  background: #0266a8;
   background: -webkit-linear-gradient(#e52b2b 0%, #8b0000 100%);
   background: -o-linear-gradient(#e52b2b 0%, #8b0000 100%);
   background-image: -webkit-linear-gradient(#e52b2b 0%, #8b0000 100%);
   background-image: -o-linear-gradient(#e52b2b 0%, #8b0000 100%);
   background-image: linear-gradient(#e52b2b 0%, #8b0000 100%);
-	border-radius:5px;
+  border-radius: 5px;
   border-top: 3px #ffb000;
   border-left: 3px groove #ffb000;
   border-right: 3px ridge #ffb000;
   border-bottom: 3px ridge #ffb000;
-	display:inline-block;
-  height:25px;
-	width:25px;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
 }
-.arrow{
-  position:relative;
+.arrow {
+  position: relative;
 }
 
 .arrow:active {
@@ -23,61 +23,61 @@ span.square{
   height: 22px;
 }
 
-.arrow.up:after{
-  position:absolute;
-  top:9px;
-  left:6px;
+.arrow.up:after {
+  position: absolute;
+  top: 9px;
+  left: 6px;
   width: 0;
-	height: 0;
-  content:'';
-	border-style: solid;
-	border-width: 0 7px 8px 7px;
-	border-color: transparent transparent #ffb000 transparent;
-  border-radius:2px;
+  height: 0;
+  content: "";
+  border-style: solid;
+  border-width: 0 7px 8px 7px;
+  border-color: transparent transparent #ffb000 transparent;
+  border-radius: 2px;
 }
 
-.arrow.up:before{
-  position:absolute;
-  top:10px;
-  left:6px;
+.arrow.up:before {
+  position: absolute;
+  top: 10px;
+  left: 6px;
   width: 0;
-	height: 0;
-  content:'';
-	border-style: solid;
-	border-width: 0 7px 8px 7px;
-	border-color: transparent transparent rgba(0,0,0,0.7) transparent;
-  border-radius:2px;
+  height: 0;
+  content: "";
+  border-style: solid;
+  border-width: 0 7px 8px 7px;
+  border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+  border-radius: 2px;
 }
 
-.arrow.down:after{
-   position:absolute;
-  top:10px;
-  left:6px;
+.arrow.down:after {
+  position: absolute;
+  top: 10px;
+  left: 6px;
   width: 0;
-	height: 0;
-  content:'';
-	border-style: solid;
-	border-width: 8px 7px 0 7px;
-	border-color: #ffb000 transparent transparent transparent;
-  border-radius:2px;
+  height: 0;
+  content: "";
+  border-style: solid;
+  border-width: 8px 7px 0 7px;
+  border-color: #ffb000 transparent transparent transparent;
+  border-radius: 2px;
 }
 
-.arrow.down:before{
-   position:absolute;
-  top:11px;
-  left:6px;
+.arrow.down:before {
+  position: absolute;
+  top: 11px;
+  left: 6px;
   width: 0;
-	height: 0;
-  content:'';
-	border-style: solid;
-	border-width: 8px 7px 0 7px;
-	border-color: rgba(0,0,0,0.7) transparent transparent transparent;
-  border-radius:2px;
+  height: 0;
+  content: "";
+  border-style: solid;
+  border-width: 8px 7px 0 7px;
+  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+  border-radius: 2px;
 }
 
-div{
-  height:100%;
-  width:100%;
+div {
+  height: 100%;
+  width: 100%;
 }
 
 input[type="file"] {
@@ -104,7 +104,7 @@ input[type="file"] {
   position: relative;
 }
 
-.imageUploadButton:hover {
+ .imageUploadButton:hover {
   background: radial-gradient(circle, #e52b2b, #8b0000);
   box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
 }
@@ -112,4 +112,25 @@ input[type="file"] {
 .imageUploadButton:active {
   background: radial-gradient(circle, #ec6a6a, #e52b2b);
   box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+span.square:hover {
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+span.square:active {
+  background: radial-gradient(circle, #ec6a6a, #e52b2b);
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+.preview {
+  border-top: 4px ridge #ffb000;
+  border-left: 4px groove #ffb000;
+  border-right: 4px ridge #ffb000;
+  border-bottom: 4px groove #ffb000;
+  border-radius: 5px;
+  height: "200px";
+  width: "200px";
+  overflow: "hidden";
+  object-fit: "cover";
 }
