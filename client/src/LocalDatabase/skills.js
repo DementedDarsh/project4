@@ -1,3 +1,28 @@
+const interval = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("resolved");
+    }, 500);
+  });
+};
+
+const test = async (setTestValue) => {
+  for (let i = 0; i < 5; i++) {
+    await interval();
+    setTestValue((prevState) => prevState - 50);
+    console.log("Hi")
+  }
+};
+
+const hits = async (skill, weaponStats, states) => {
+    for (let i = 0; i < weaponStats; i++) {
+        states(true)
+        skill(weaponStats, states);
+        await interval();
+    }
+}
+
+
 module.exports = {
   imbueFire: {
     name: "Imbue: Fire",
@@ -11,8 +36,11 @@ module.exports = {
     name: "Aimed Strike",
     tooltipText: "An aimed attacked that never misses",
     imagePath: "test",
-    effect: (weaponStats, states) => {
-      console.log("An aimed attacked that never misses");
+    effect: async (weaponStats, states) => {
+        const skill = (weaponStats, states) => console.log(weaponStats);
+        await hits(skill, weaponStats, states);
+        states(false)
+        
     },
   },
   rendArmor: {
@@ -28,8 +56,10 @@ module.exports = {
     tooltipText:
       "You thirst for blood, on the next attack, you heal life equals to the damage dealt",
     imagePath: "test",
-    effect: (setLifeSteal) => {
+    effect: (setLifeSteal, setTestValue) => {
       setLifeSteal(true);
+      //   this.enemyHit(Math.floor(Math.random() * 5));
+      test(setTestValue);
     },
   },
 };
