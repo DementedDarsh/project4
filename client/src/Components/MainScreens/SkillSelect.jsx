@@ -34,7 +34,7 @@ const SkillSelect = (props) => {
   const skillChoices = skillList.map((item, index) => {
     return (
       <tr key={index} onClick={() => handleListClick(item)}>
-        <td style={{ height: "100px" }}>
+        <td style={{ height: "100px", textAlign: "center", verticalAlign: "center"}}>
           <img src={item.imagePath} style={{ height: "100px" }} /><br />
           {item.name}
         </td>
