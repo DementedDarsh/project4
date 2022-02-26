@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 const skills = require("../../LocalDatabase/skills");
 
+
 const SkillSelect = (props) => {
-  const [skillList, setSkillList] = useState(skills);
-  const [chosenSkills, setChosenSkills] = useState([]);
+//   const [skillList, setSkillList] = useState(skills);
+//   const [chosenSkills, setChosenSkills] = useState([]);
+const [skillList, setSkillList, chosenSkills, setChosenSkills, monster, setMonster, lifeSteal, setLifesteal] = useOutletContext()
 
   const handleListClick = (e) => {
     console.log(e);

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, createContext, useContext, useState } from "react";
-import { Routes, Route, Navigate, useSearchParams } from "react-router-dom";
+import { Routes, Route, Navigate, useSearchParams, useOutletContext } from "react-router-dom";
 const skills = require("../../LocalDatabase/skills");
 
 const BattleScreen = () => {
@@ -9,6 +9,7 @@ const BattleScreen = () => {
   const [currentMonster, setCurrentMonster] = useState({});
   const [testValue, setTestValue] = useState(200);
   const [disabled, setDisabled] = useState(false);
+    const test = useOutletContext()
 
   const setRandomMonster = (monsters) => {
     setCurrentMonster(monsters[Math.floor(Math.random() * monsters?.length)]);
@@ -19,7 +20,8 @@ const BattleScreen = () => {
       const monsterData = await axios.get("/api/monster/monsters");
       setMonsters(monsterData.data.data);
       setRandomMonster(monsterData?.data?.data);
-      skills.aimedStrike.effect(20, setDisabled);
+    //   skills.aimedStrike.effect(20, setDisabled);
+    console.log(test)
     };
     getMonsters();
   }, []);
