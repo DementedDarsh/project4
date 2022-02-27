@@ -16,7 +16,7 @@ const test = async (setTestValue) => {
 
 const hits = async (skill, weaponStats, states) => {
   for (let i = 0; i < weaponStats; i++) {
-    states(true);
+    // states(true);
     skill(weaponStats, states);
     await interval();
   }

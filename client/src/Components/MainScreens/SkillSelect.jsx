@@ -1,20 +1,22 @@
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 const skills = require("../../LocalDatabase/skills");
 
-
 const SkillSelect = (props) => {
-//   const [skillList, setSkillList] = useState(skills);
-//   const [chosenSkills, setChosenSkills] = useState([]);
-const [skillList, setSkillList, chosenSkills, setChosenSkills, monster, setMonster, lifeSteal, setLifesteal] = useOutletContext()
+  const [skillList, setSkillList] = useState(skills);
+  const [chosenSkills, setChosenSkills] = useOutletContext();
+  const [skillPoints, setSkillPoints] = useState(5);
 
   const handleListClick = (e) => {
     console.log(e);
-    setChosenSkills((prevState) => [...prevState, e]);
-    const array = skillList;
-    array.splice(array.indexOf(e), 1);
-    console.log(array);
-    setSkillList(array);
+    if (skillPoints > 0) {
+      setChosenSkills((prevState) => [...prevState, e]);
+      const array = skillList;
+      array.splice(array.indexOf(e), 1);
+      console.log(array);
+      setSkillList(array);
+      setSkillPoints((prevState) => prevState - 1);
+    }
   };
 
   const handleChosenClick = (e) => {
@@ -24,6 +26,7 @@ const [skillList, setSkillList, chosenSkills, setChosenSkills, monster, setMonst
     array.splice(array.indexOf(e), 1);
     console.log(array);
     setChosenSkills(array);
+    setSkillPoints((prevState) => prevState + 1);
   };
 
   //   const skillChoices = skillList.map((item, index) => {
@@ -37,8 +40,15 @@ const [skillList, setSkillList, chosenSkills, setChosenSkills, monster, setMonst
   const skillChoices = skillList.map((item, index) => {
     return (
       <tr key={index} onClick={() => handleListClick(item)}>
-        <td style={{ height: "100px", textAlign: "center", verticalAlign: "center"}}>
-          <img src={item.imagePath} style={{ height: "100px" }} /><br />
+        <td
+          style={{
+            height: "100px",
+            textAlign: "center",
+            verticalAlign: "center",
+          }}
+        >
+          <img src={item.imagePath} style={{ height: "100px" }} />
+          <br />
           {item.name}
         </td>
         <td>{item.tooltipText}</td>
@@ -49,8 +59,15 @@ const [skillList, setSkillList, chosenSkills, setChosenSkills, monster, setMonst
   const skillsChosen = chosenSkills.map((item, index) => {
     return (
       <tr key={index} onClick={() => handleChosenClick(item)}>
-        <td style={{ height: "100px", textAlign: "center", verticalAlign: "center"}}>
-          <img src={item.imagePath} style={{ height: "100px" }} /><br />
+        <td
+          style={{
+            height: "100px",
+            textAlign: "center",
+            verticalAlign: "center",
+          }}
+        >
+          <img src={item.imagePath} style={{ height: "100px" }} />
+          <br />
           {item.name}
         </td>
         <td>{item.tooltipText}</td>
@@ -61,12 +78,18 @@ const [skillList, setSkillList, chosenSkills, setChosenSkills, monster, setMonst
   return (
     <div className="skillsContainer">
       <span>
-        <table style={{width: "500px"}}>
+        <table style={{ width: "500px" }}>
           <tbody>{skillsChosen}</tbody>
         </table>
       </span>
+      <div style={{ margin: "auto" }}>
+        {skillPoints}{" "}
+        <Link to={`/game/battle`}>
+          <button className="button">battle</button>
+        </Link>
+      </div>
       <span>
-        <table style={{width: "500px"}}>
+        <table style={{ width: "500px" }}>
           <tbody>{skillChoices}</tbody>
         </table>
       </span>
