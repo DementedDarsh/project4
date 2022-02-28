@@ -12,14 +12,14 @@
 }
 
 #monsterHP {
-  background: linear-gradient(to left, #32dd49, #1afa05);
+  background: linear-gradient(to top, #32dd49, #4e8649);
   border-radius: 3px;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  margin-top: -1px;
+  height: 105%;
   opacity: 1;
   position: absolute;
   transition: width 0.5s;
@@ -29,4 +29,19 @@
   color: #000;
   position: absolute;
   margin-top: 5px;
+}
+
+.combatLog {
+    border: 2px solid gold;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    justify-content: flex-start;
+}
+
+.combatLogEntry {
+    min-height: 0;
+    height: 0;
 }

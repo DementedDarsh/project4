@@ -3,7 +3,7 @@ import "./style.css";
 
 const Monster = (props) => {
   const currentMonster = props.currentMonster;
-  const monsterHpWidth = props.hp * 100/ currentMonster.hp;
+  const monsterHpWidth = (props.hp * 100/ currentMonster.hp);
 
   return (
     <div >

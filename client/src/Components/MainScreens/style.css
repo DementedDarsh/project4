@@ -46,6 +46,10 @@ div {
   height: auto;
 }
 
+.toolbar {
+  display: flex;
+}
+
 .skillsContainer {
   display: flex;
   flex-direction: row;

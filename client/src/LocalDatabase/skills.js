@@ -27,8 +27,9 @@ module.exports = [
     name: "Imbue: Fire",
     tooltipText: "Imbues with fire",
     imagePath: "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
-    effect: (weaponStats, states) => {
-      console.log("Imbue Fire does additional damage for each hit");
+    effect: (gameState) => {
+      gameState.setMonsterHP(prevState => prevState - 50);
+      gameState.setCombatLog(prevState => [... prevState, "You dealt 50 damage"])
     },
   },
   {
