@@ -5,7 +5,6 @@ const Monster = require("../models/monsterModel");
 
 
 // READ - get all monsters
-//* get all images
 
 router.get("/monsters", async (req, res) => {
     try {

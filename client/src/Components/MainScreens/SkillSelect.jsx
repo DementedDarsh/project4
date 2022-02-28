@@ -4,7 +4,7 @@ const skills = require("../../LocalDatabase/skills");
 
 const SkillSelect = (props) => {
   const [skillList, setSkillList] = useState(skills);
-  const [chosenSkills, setChosenSkills] = useOutletContext();
+  const [chosenSkills, setChosenSkills] = useState([]);
   const [skillPoints, setSkillPoints] = useState(5);
 
   const handleListClick = (e) => {
@@ -13,8 +13,10 @@ const SkillSelect = (props) => {
       setChosenSkills((prevState) => [...prevState, e]);
       const array = skillList;
       array.splice(array.indexOf(e), 1);
-      console.log(array);
+      //   console.log(array);
       setSkillList(array);
+      //   console.log(JSON.stringify(array));
+      //   localStorage.setItem("skills", JSON.stringify(array));
       setSkillPoints((prevState) => prevState - 1);
     }
   };
@@ -27,6 +29,12 @@ const SkillSelect = (props) => {
     console.log(array);
     setChosenSkills(array);
     setSkillPoints((prevState) => prevState + 1);
+  };
+
+  const handleSubmit = () => {
+    localStorage.clear();
+    console.log(chosenSkills);
+    localStorage.setItem("skills", JSON.stringify(chosenSkills));
   };
 
   //   const skillChoices = skillList.map((item, index) => {
@@ -85,7 +93,7 @@ const SkillSelect = (props) => {
       <div style={{ margin: "auto" }}>
         {skillPoints}{" "}
         <Link to={`/game/battle`}>
-          <button className="button">battle</button>
+          <button onClick={handleSubmit} className="button">battle</button>
         </Link>
       </div>
       <span>

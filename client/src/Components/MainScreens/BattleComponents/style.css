@@ -1,0 +1,32 @@
+#monster-HPBar {
+  background-color: #ff0000;
+  border-radius: 5px;
+  border: 2px solid;
+  border-color: black;
+  position: relative;
+  margin: auto;
+  margin-top: 00px;
+  height: 30px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+#monsterHP {
+  background: linear-gradient(to left, #32dd49, #1afa05);
+  border-radius: 3px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: absolute;
+  transition: width 0.5s;
+}
+
+#monsterHPNumber {
+  color: #000;
+  position: absolute;
+  margin-top: 5px;
+}

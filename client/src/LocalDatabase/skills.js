@@ -38,7 +38,7 @@ module.exports = [
     effect: async (weaponStats, states) => {
       const skill = (weaponStats, states) => console.log(weaponStats);
       await hits(skill, weaponStats, states);
-      states(false);
+    //   states(false);
     },
   },
   {

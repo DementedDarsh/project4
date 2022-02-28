@@ -2,6 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Weapon = require("../models/weaponModel")
 
+// READ - get all weapons
+
+router.get("/weapons", async (req, res) => {
+  try {
+    const weapons = await Weapon.find({});
+    res
+      .status(200)
+      .json({ status: "ok", message: "Get Weapons", data: weapons });
+  } catch (error) {
+    res.json({ status: "not ok", message: error.message });
+  }
+});
+
 // CREATE - post new weapon
 router.post("/new", async (req, res) => {
   const newWeapon = {
