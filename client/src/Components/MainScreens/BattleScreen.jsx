@@ -11,6 +11,7 @@ import {
 import Monster from "./BattleComponents/Monster";
 import SkillBar from "./BattleComponents/SkillBar";
 import CombatLog from "./BattleComponents/CombatLog";
+import ReactTooltip from "react-tooltip";
 const skills = require("../../LocalDatabase/skills");
 
 const BattleScreen = () => {
@@ -159,12 +160,6 @@ const BattleScreen = () => {
         </tr>
       </tbody>
     </table>
-
-    // <div>
-    //   {monster}
-    //   {testValue}
-    //   {skillBar}
-    // </div>
   );
 };
 
