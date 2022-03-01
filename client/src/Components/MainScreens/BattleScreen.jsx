@@ -23,6 +23,8 @@ const BattleScreen = () => {
   const [combatLog, setCombatLog] = useState([]);
   const [lifeSteal, setLifeSteal] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [playerHP, setPlayerHP] = useState(600);
+  const playerMaxHP = 1000;
 
   const randomMonster = () => {
     setCurrentMonster(monsters[Math.floor(Math.random() * monsters.length)]);
@@ -113,8 +115,28 @@ const BattleScreen = () => {
       </thead>
       <tbody>
         <tr style={{ height: "550px" }}>
-          <td onClick={test} style={{ width: "75%", textAlign: "center" }}>
+          <td
+            className="battleArea"
+            onClick={test}
+            style={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              justifyContent: "space-between",
+              textAlign: "center",
+            }}
+          >
             <Monster currentMonster={currentMonster} hp={monsterHP} />
+            <div className="player-HPBar">
+              <div
+                className="playerHP"
+                style={{ width: ` ${(playerHP * 100) / playerMaxHP}%` }}
+              ></div>
+              <div className="playerHPNumber">
+                {playerHP}/{playerMaxHP}
+              </div>
+            </div>
           </td>
           <td style={{ width: "25%" }}>
             <CombatLog combatLog={combatLog} />
@@ -131,10 +153,7 @@ const BattleScreen = () => {
                 <br />
                 {currentWeapon.name}
               </span>
-              <span style={{ display: "flex", flexDirection: "row" }}>
-                <SkillBar skills={chosenSkills} gameState={gameState} />
-                {/* {skillBar} */}
-              </span>
+              <SkillBar skills={chosenSkills} gameState={gameState} />
             </div>
           </td>
         </tr>

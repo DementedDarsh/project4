@@ -1,0 +1,28 @@
+.player-HPBar {
+  background-color: #ff0000;
+  border: 2px solid;
+  border-color: black;
+  position: relative;
+  height: 30px;
+  width: 100%;
+}
+
+.playerHP {
+  background: linear-gradient(to left, #32dd49, #1afa05);
+  border-color: black;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  transition: width 0.25s;
+  transition-delay: 0.25s;
+}
+
+.playerHPNumber {
+  color: #000;
+  position: absolute;
+  margin-top: -25px;
+}
