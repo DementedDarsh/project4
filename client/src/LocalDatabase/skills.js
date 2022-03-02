@@ -16,7 +16,7 @@ const test = async (gameState) => {
 };
 
 const hitAmount = async (gameState, skill) => {
-  for (let i = 0; i < gameState.weapon.attackSpeed; i++) {
+  for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
     // states(true);
     skill(gameState);
     await interval();
@@ -24,13 +24,13 @@ const hitAmount = async (gameState, skill) => {
 };
 
 const hitCalc = async (gameState) => {
-  if (gameState.weapon.hitRate > Math.random() * 100) {
+  if (gameState.currentWeapon.hitRate > Math.random() * 100) {
     return true;
   }
 };
 
 const critCalc = async (gameState) => {
-  if (gameState.weapon.critRate > Math.random() * 100) {
+  if (gameState.currentWeapon.critRate > Math.random() * 100) {
     return true;
   }
 };
@@ -41,36 +41,94 @@ const combatLogAdd = (gameState, string) => {
     document.querySelector(".combatLog").scrollHeight;
 };
 
-module.exports = [
+const monsterAttack = async (gameState) => {
+  await interval();
+  const x = gameState.currentMonster.attack;
+  await gameState.setPlayerHP((prevState) => prevState - x);
+  localStorage.setItem("playerHP", JSON.stringify(gameState.playerHP - x));
+  console.log(localStorage.playerHP);
+  const combatLogEntry = `${gameState.currentMonster.name} attacks! You took ${x} damage`;
+  combatLogAdd(gameState, combatLogEntry);
+  await gameState.setDisabled(false);
+};
+
+const playerEnd = async (gameState, newMonsterHP) => {
+  if (newMonsterHP > 0) {
+    gameState.setDisabled(true);
+    await monsterAttack(gameState);
+  } else {
+    combatLogAdd(gameState, "Monster died");
+    setNewMonster(gameState);
+    gameState.setDisabled(false);
+  }
+  const random = Math.floor(Math.random() * gameState.weapons.length);
+  gameState.setCurrentWeapon(gameState.weapons[random]);
+};
+
+const setNewMonster = (gameState) => {
+  gameState.setLevel((prevState) => prevState + 1);
+  const multiplier = gameState.level * 2 + 10;
+  console.log(multiplier);
+  const random = Math.floor(Math.random() * gameState.monsters.length);
+  let newMonster = gameState.monsters[random];
+  newMonster = (prevState) => ({
+    ...prevState,
+    hp: prevState.hp * multiplier,
+    attack: prevState.attack * multiplier,
+    defense: prevState.defense * multiplier,
+  });
+  gameState.setCurrentMonster(gameState.monsters[random]);
+  gameState.setCurrentMonster((prevState) => ({
+    ...prevState,
+    hp: (prevState.hp * multiplier) / 10,
+    attack: (prevState.attack * multiplier) / 10,
+    defense: (prevState.defense * multiplier) / 10,
+  }));
+  gameState.setMonsterHP(gameState.monsters[random].hp);
+  gameState.setMonsterHP((prevState) => (prevState * multiplier)/10)
+  const newMonsterString = `A wild ${gameState.monsters[random].name} appeared!`;
+  combatLogAdd(gameState, newMonsterString);
+};
+
+const skills = [
   {
     name: "Imbue: Fire",
     tooltipText: "Imbues with fire",
     imagePath:
-      "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
+      "https://res.cloudinary.com/djtovzgnc/image/upload/v1646202142/project4/ek2rhi2vs09pthbv54fd.png",
     effect: async (gameState) => {
       gameState.setDisabled(true);
-      for (let i = 0; i < gameState.weapon.attackSpeed; i++) {
+      let newMonsterHP = gameState.monsterHP;
+      for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
         const x = 20;
         const hit = await hitCalc(gameState);
         if (hit === true) {
           const crit = await critCalc(gameState);
           if (crit === true) {
-            gameState.setMonsterHP(
-              (prevState) => prevState - (x + gameState.weapon.weaponDamage * 2)
+            await gameState.setMonsterHP(
+              (prevState) =>
+                prevState - (x + gameState.currentWeapon.weaponDamage * 2)
             );
+            newMonsterHP =
+              newMonsterHP - (x + gameState.currentWeapon.weaponDamage * 2);
+            console.log(newMonsterHP);
             combatLogAdd(
               gameState,
               `Critical Hit! You dealt ${
-                gameState.weapon.weaponDamage * 2
+                gameState.currentWeapon.weaponDamage * 2
               } with your weapon, and an additional ${x} burn damage!`
             );
           } else {
-            gameState.setMonsterHP(
-              (prevState) => prevState - (x + gameState.weapon.weaponDamage)
+            await gameState.setMonsterHP(
+              (prevState) =>
+                prevState - (x + gameState.currentWeapon.weaponDamage)
             );
+            newMonsterHP =
+              newMonsterHP - (x + gameState.currentWeapon.weaponDamage);
+            console.log(newMonsterHP);
             combatLogAdd(
               gameState,
-              `You dealt ${gameState.weapon.weaponDamage} with your weapon, and an additional ${x} burn damage!`
+              `You dealt ${gameState.currentWeapon.weaponDamage} with your weapon, and an additional ${x} burn damage!`
             );
           }
         } else {
@@ -78,18 +136,18 @@ module.exports = [
         }
         await interval();
       }
-      gameState.setDisabled(false);
+      await playerEnd(gameState, newMonsterHP);
     },
   },
   {
     name: "Aimed Strike",
     tooltipText: "An aimed attacked that never misses",
     imagePath:
-      "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
+      "https://res.cloudinary.com/djtovzgnc/image/upload/v1645849941/project4/ky8zcy7eryeloiyexfwu.png",
     effect: async (gameState) => {
       test(gameState);
-      // const skill = (weapon, states) => console.log(weapon);
-      // await hitAmount(skill, weapon, states);
+      // const skill = (currentWeapon, states) => console.log(currentWeapon);
+      // await hitAmount(skill, currentWeapon, states);
       //   states(false);
     },
   },
@@ -98,7 +156,7 @@ module.exports = [
     tooltipText: "Destroys the target's defenses",
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
-    effect: (weapon, states) => {
+    effect: (currentWeapon, states) => {
       console.log("Destroys the target's defenses");
     },
   },
@@ -111,3 +169,5 @@ module.exports = [
     effect: (gameState) => {},
   },
 ];
+
+module.exports = { skills };

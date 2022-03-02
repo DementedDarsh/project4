@@ -12,20 +12,22 @@ import Monster from "./BattleComponents/Monster";
 import SkillBar from "./BattleComponents/SkillBar";
 import CombatLog from "./BattleComponents/CombatLog";
 import ReactTooltip from "react-tooltip";
-const skills = require("../../LocalDatabase/skills");
+import {skills} from "../../LocalDatabase/skills"
 
 const BattleScreen = () => {
   const [monsters, setMonsters] = useState([]);
   const [weapons, setWeapons] = useState([]);
   const [currentMonster, setCurrentMonster] = useState("TEST");
   const [currentWeapon, setCurrentWeapon] = useState({});
-  const [monsterHP, setMonsterHP] = useState(currentMonster.hp);
+  const [monsterHP, setMonsterHP] = useState(0);
   const [chosenSkills, setChosenSkills] = useOutletContext();
   const [combatLog, setCombatLog] = useState([]);
+  const [level, setLevel] = useState(1);
   const [lifeSteal, setLifeSteal] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [playerHP, setPlayerHP] = useState(600);
+  const [playerHP, setPlayerHP] = useState(1000);
   const playerMaxHP = 1000;
+  const playerHpWidth = playerHP > 0 ? (playerHP * 100/ playerMaxHP) : 0
 
   const randomMonster = () => {
     setCurrentMonster(monsters[Math.floor(Math.random() * monsters.length)]);
@@ -39,6 +41,7 @@ const BattleScreen = () => {
 
   useEffect(() => {
     const getMonsters = async () => {
+        console.log(localStorage.skills);
       const monsterData = await (
         await axios.get("/api/monster/monsters")
       ).data.data;
@@ -59,7 +62,10 @@ const BattleScreen = () => {
     };
 
     const getPlayer = () => {
-      setChosenSkills(JSON.parse(localStorage.skills));
+        if(localStorage.getItem("skills")){
+        setChosenSkills(JSON.parse(localStorage.getItem("skills")))}
+    //   setChosenSkills(JSON.parse(localStorage.skills));
+    //   setPlayerHP(parseInt(localStorage.playerHP))
     };
 
     getMonsters();
@@ -72,45 +78,25 @@ const BattleScreen = () => {
   };
 
   const gameState = {
-    weapon: currentWeapon,
-    monster: currentMonster,
+    weapons: weapons,
+    currentWeapon: currentWeapon,
+    setCurrentWeapon: setCurrentWeapon,
+    monsters: monsters,
+    currentMonster: currentMonster,
+    setCurrentMonster: setCurrentMonster,
     monsterHP: monsterHP,
     setMonsterHP: setMonsterHP,
+    level: level,
+    setLevel: setLevel,
+    playerHP: playerHP,
+    setPlayerHP: setPlayerHP,
     setCombatLog: setCombatLog,
     disabled: disabled,
     setDisabled: setDisabled,
   };
 
-  // const monsterList = monsters?.map((item, index) => {return <div key={index}><img src={item.imagePath} style={{maxHeight: "300px", maxWidth: "400px"}}/><div>{item.hp}</div></div>})
-
-  //   const monster = (
-  //     <div>
-  //       {currentMonster?.name}
-  //       <br />
-  //       <img
-  //         src={currentMonster?.imagePath}
-  //         style={{ maxHeight: "300px", maxWidth: "400px" }}
-  //       />
-  //       <div>{currentMonster?.hp}</div>
-  //     </div>
-  //   );
-
-  //   const skillBar = chosenSkills.map((item, index) => {
-  //     return (
-  //       <span key={index}>
-  //         {/* <button onClick={onTest}>Test</button> */}
-  //         <img
-  //           src={item.imagePath}
-  //           style={{ height: "100px" }}
-  //           //   onClick={() => item.effect()}
-  //         />
-  //         <br />
-  //         {item.name}
-  //       </span>
-  //     );
-  //   });
   return (
-    <table style={{ width: "100%", height: "100%" }}>
+    <table style={{ width: "100%", height: "100%", marginLeft: "30px"}}>
       <thead>
         <tr>
           <th colSpan="2">TITLE</th>
@@ -130,14 +116,15 @@ const BattleScreen = () => {
               textAlign: "center",
             }}
           >
+              Level: {level}
             <Monster currentMonster={currentMonster} hp={monsterHP} />
             <div className="player-HPBar">
               <div
                 className="playerHP"
-                style={{ width: ` ${(playerHP * 100) / playerMaxHP}%` }}
+                style={playerHP > 0 ? { width: ` ${playerHpWidth}%` }:{ width: "0%", paddingRight: "0px" } }
               ></div>
               <div className="playerHPNumber">
-                {playerHP}/{playerMaxHP}
+              {playerHP > 0 ? playerHP : 0}/{playerMaxHP}
               </div>
             </div>
           </td>
@@ -163,6 +150,12 @@ const BattleScreen = () => {
                 getContent={(dataTip) => `${dataTip}`}
               />
               <SkillBar skills={chosenSkills} gameState={gameState} />
+              <ReactTooltip
+        id="toolTip"
+        place="bottom"
+        effect="solid"
+        getContent={(dataTip) => `${dataTip}`}
+      ></ReactTooltip>
             </div>
           </td>
         </tr>

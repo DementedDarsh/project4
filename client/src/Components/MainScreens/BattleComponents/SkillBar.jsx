@@ -1,8 +1,9 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-const skills = require("../../../LocalDatabase/skills");
+import {skills} from "../../../LocalDatabase/skills";
 
 const SkillBar = (props) => {
+
   const skillBar = props.skills.map((item, index) => {
     return (
       <span key={index} data-for="toolTip" data-tip={item?.tooltipText}>
@@ -17,8 +18,10 @@ const SkillBar = (props) => {
               : { height: "100px" }
           }
           src={item.imagePath}
-          onClick={() =>
+          onClick={() => {
             skills.find((x) => x.name === item.name).effect(props.gameState)
+
+        }
           }
         />
         <br />

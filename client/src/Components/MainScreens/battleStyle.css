@@ -8,14 +8,15 @@
 }
 
 .playerHP {
-  background: linear-gradient(to left, #32dd49, #1afa05);
+  background: linear-gradient(to top, #32dd49, #4e8649);
   border-color: black;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  margin-left: -1px;
+  padding-right: 1px;
+  height: 101%;
   opacity: 1;
   transition: width 0.25s;
   transition-delay: 0.25s;
@@ -53,11 +54,11 @@
 }
 
 #registerTip {
-    width: auto;
-    max-width: 200px;
+  width: auto;
+  max-width: 200px;
 }
 
 #toolTip {
-    width: auto;
-    max-width: 150px;
+  width: auto;
+  max-width: 150px;
 }

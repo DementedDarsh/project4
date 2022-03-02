@@ -18,7 +18,8 @@ const Monster = (props) => {
       <img
         src={currentMonster?.imagePath}
         style={{ maxHeight: "300px", maxWidth: "300px" }}
-      />
+      /><br/>
+      <span>Attack: {currentMonster?.attack} Defense: {currentMonster?.defense}</span>
     </div>
   );
 };
