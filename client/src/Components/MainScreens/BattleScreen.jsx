@@ -77,6 +77,8 @@ const BattleScreen = () => {
     monsterHP: monsterHP,
     setMonsterHP: setMonsterHP,
     setCombatLog: setCombatLog,
+    disabled: disabled,
+    setDisabled: setDisabled,
   };
 
   // const monsterList = monsters?.map((item, index) => {return <div key={index}><img src={item.imagePath} style={{maxHeight: "300px", maxWidth: "400px"}}/><div>{item.hp}</div></div>})
@@ -146,7 +148,7 @@ const BattleScreen = () => {
         <tr>
           <td>
             <div className="toolbar">
-              <span>
+              <span data-for="toolTip" data-tip={currentWeapon.weaponDamage}>
                 <img
                   src={currentWeapon?.imagePath}
                   style={{ maxHeight: "120px", maxWidth: "120px" }}
@@ -154,6 +156,12 @@ const BattleScreen = () => {
                 <br />
                 {currentWeapon.name}
               </span>
+              <ReactTooltip
+                id="toolTip"
+                place="bottom"
+                effect="solid"
+                getContent={(dataTip) => `${dataTip}`}
+              />
               <SkillBar skills={chosenSkills} gameState={gameState} />
             </div>
           </td>

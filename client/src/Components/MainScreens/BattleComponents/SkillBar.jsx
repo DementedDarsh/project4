@@ -5,11 +5,18 @@ const skills = require("../../../LocalDatabase/skills");
 const SkillBar = (props) => {
   const skillBar = props.skills.map((item, index) => {
     return (
-      <span key={index} className="tooltip">
-        <span className="tooltiptext tooltip">{item.tooltipText}</span>
+      <span key={index} data-for="toolTip" data-tip={item?.tooltipText}>
         <img
+          style={
+            props.gameState.disabled === true
+              ? {
+                  pointerEvents: "none",
+                  filter: "grayscale(1)",
+                  height: "100px",
+                }
+              : { height: "100px" }
+          }
           src={item.imagePath}
-          style={{ height: "100px" }}
           onClick={() =>
             skills.find((x) => x.name === item.name).effect(props.gameState)
           }
@@ -19,6 +26,7 @@ const SkillBar = (props) => {
       </span>
     );
   });
+
   return (
     <span
       style={{
@@ -29,6 +37,12 @@ const SkillBar = (props) => {
       }}
     >
       {skillBar}
+      <ReactTooltip
+        id="toolTip"
+        place="bottom"
+        effect="solid"
+        getContent={(dataTip) => `${dataTip}`}
+      ></ReactTooltip>
     </span>
   );
 };

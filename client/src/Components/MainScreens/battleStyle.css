@@ -51,3 +51,13 @@
   visibility: visible;
   opacity: 0.9;
 }
+
+#registerTip {
+    width: auto;
+    max-width: 200px;
+}
+
+#toolTip {
+    width: auto;
+    max-width: 150px;
+}

@@ -1,4 +1,4 @@
-const interval = () => {
+const interval = (gameState) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve("resolved");
@@ -6,11 +6,12 @@ const interval = () => {
   });
 };
 
-const test = async (setTestValue) => {
+const test = async (gameState) => {
   for (let i = 0; i < 5; i++) {
+    gameState.setDisabled(true);
     await interval();
-    setTestValue((prevState) => prevState - 50);
     console.log("Hi");
+    gameState.setDisabled(false);
   }
 };
 
@@ -47,6 +48,7 @@ module.exports = [
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
     effect: async (gameState) => {
+      gameState.setDisabled(true);
       for (let i = 0; i < gameState.weapon.attackSpeed; i++) {
         const x = 20;
         const hit = await hitCalc(gameState);
@@ -76,6 +78,7 @@ module.exports = [
         }
         await interval();
       }
+      gameState.setDisabled(false);
     },
   },
   {
@@ -83,9 +86,10 @@ module.exports = [
     tooltipText: "An aimed attacked that never misses",
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
-    effect: async (weapon, states) => {
-      const skill = (weapon, states) => console.log(weapon);
-      await hitAmount(skill, weapon, states);
+    effect: async (gameState) => {
+      test(gameState);
+      // const skill = (weapon, states) => console.log(weapon);
+      // await hitAmount(skill, weapon, states);
       //   states(false);
     },
   },
@@ -101,13 +105,9 @@ module.exports = [
   {
     name: "Vampirism",
     tooltipText:
-      "You thirst for blood, on the next weaponDamage, you heal life equals to the damage dealt",
+      "You thirst for blood, on the next attack, you heal life equals to the damage dealt",
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
-    effect: (setLifeSteal, setTestValue) => {
-      setLifeSteal(true);
-      //   this.enemyHit(Math.floor(Math.random() * 5));
-      test(setTestValue);
-    },
+    effect: (gameState) => {},
   },
 ];

@@ -20,13 +20,6 @@ const CombatLog = (props) => {
   });
   return (
     <div className="combatLog">
-              <button data-tip data-for="registerTip" style={{width: "100px"}}>
-        Register
-      </button>
-
-      <ReactTooltip id="registerTip" place="bottom" effect="solid" padding="0px" maxWidth="50px">
-        Tooltip for the register button
-      </ReactTooltip>
       <table>
         <tbody>{combatLogOutput}</tbody>
       </table>
