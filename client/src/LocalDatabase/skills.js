@@ -45,10 +45,14 @@ const monsterAttack = async (gameState) => {
   await interval();
   const x = gameState.currentMonster.attack;
   await gameState.setPlayerHP((prevState) => prevState - x);
-  localStorage.setItem("playerHP", JSON.stringify(gameState.playerHP - x));
+  // localStorage.setItem("playerHP", JSON.stringify(gameState.playerHP - x));
   console.log(localStorage.playerHP);
   const combatLogEntry = `${gameState.currentMonster.name} attacks! You took ${x} damage`;
   combatLogAdd(gameState, combatLogEntry);
+  if (gameState.playerHP - x < 0) {
+    combatLogAdd(gameState, "You died");
+    gameState.playerLoseGame();
+  }
   await gameState.setDisabled(false);
 };
 
@@ -70,13 +74,13 @@ const setNewMonster = (gameState) => {
   const multiplier = gameState.level * 2 + 10;
   console.log(multiplier);
   const random = Math.floor(Math.random() * gameState.monsters.length);
-  let newMonster = gameState.monsters[random];
-  newMonster = (prevState) => ({
-    ...prevState,
-    hp: prevState.hp * multiplier,
-    attack: prevState.attack * multiplier,
-    defense: prevState.defense * multiplier,
-  });
+  // let newMonster = gameState.monsters[random];
+  // newMonster = (prevState) => ({
+  //   ...prevState,
+  //   hp: prevState.hp * multiplier,
+  //   attack: prevState.attack * multiplier,
+  //   defense: prevState.defense * multiplier,
+  // });
   gameState.setCurrentMonster(gameState.monsters[random]);
   gameState.setCurrentMonster((prevState) => ({
     ...prevState,

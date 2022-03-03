@@ -12,7 +12,8 @@ import Monster from "./BattleComponents/Monster";
 import SkillBar from "./BattleComponents/SkillBar";
 import CombatLog from "./BattleComponents/CombatLog";
 import ReactTooltip from "react-tooltip";
-import {skills} from "../../LocalDatabase/skills"
+import { skills } from "../../LocalDatabase/skills";
+import { useNavigate } from "react-router-dom";
 
 const BattleScreen = () => {
   const [monsters, setMonsters] = useState([]);
@@ -20,28 +21,23 @@ const BattleScreen = () => {
   const [currentMonster, setCurrentMonster] = useState("TEST");
   const [currentWeapon, setCurrentWeapon] = useState({});
   const [monsterHP, setMonsterHP] = useState(0);
-  const [chosenSkills, setChosenSkills] = useOutletContext();
+  const [chosenSkills, setChosenSkills] = useState([]);
   const [combatLog, setCombatLog] = useState([]);
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useOutletContext();
   const [lifeSteal, setLifeSteal] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [playerHP, setPlayerHP] = useState(1000);
   const playerMaxHP = 1000;
-  const playerHpWidth = playerHP > 0 ? (playerHP * 100/ playerMaxHP) : 0
+  const playerHpWidth = playerHP > 0 ? (playerHP * 100) / playerMaxHP : 0;
+  const navigate = useNavigate();
 
-  const randomMonster = () => {
-    setCurrentMonster(monsters[Math.floor(Math.random() * monsters.length)]);
-  };
-  const randomWeapon = () => {
-    setCurrentWeapon(weapons[Math.floor(Math.random() * weapons.length)]);
-  };
-  const test = () => {
-    setMonsterHP((prevState) => prevState - 50);
+  const playerLoseGame = () => {
+    navigate("/game/gameover", { replace: false });
   };
 
   useEffect(() => {
     const getMonsters = async () => {
-        console.log(localStorage.skills);
+      console.log(localStorage.skills);
       const monsterData = await (
         await axios.get("/api/monster/monsters")
       ).data.data;
@@ -62,10 +58,11 @@ const BattleScreen = () => {
     };
 
     const getPlayer = () => {
-        if(localStorage.getItem("skills")){
-        setChosenSkills(JSON.parse(localStorage.getItem("skills")))}
-    //   setChosenSkills(JSON.parse(localStorage.skills));
-    //   setPlayerHP(parseInt(localStorage.playerHP))
+      if (localStorage.getItem("skills")) {
+        setChosenSkills(JSON.parse(localStorage.getItem("skills")));
+      }
+      //   setChosenSkills(JSON.parse(localStorage.skills));
+      //   setPlayerHP(parseInt(localStorage.playerHP))
     };
 
     getMonsters();
@@ -93,10 +90,11 @@ const BattleScreen = () => {
     setCombatLog: setCombatLog,
     disabled: disabled,
     setDisabled: setDisabled,
+    playerLoseGame: playerLoseGame
   };
 
   return (
-    <table style={{ width: "100%", height: "100%", marginLeft: "30px"}}>
+    <table style={{ width: "100%", height: "100%", marginLeft: "30px" }}>
       <thead>
         <tr>
           <th colSpan="2">TITLE</th>
@@ -106,7 +104,6 @@ const BattleScreen = () => {
         <tr style={{ height: "550px" }}>
           <td
             className="battleArea"
-            onClick={test}
             style={{
               height: "100%",
               display: "flex",
@@ -116,15 +113,19 @@ const BattleScreen = () => {
               textAlign: "center",
             }}
           >
-              Level: {level}
+            Level: {level}
             <Monster currentMonster={currentMonster} hp={monsterHP} />
             <div className="player-HPBar">
               <div
                 className="playerHP"
-                style={playerHP > 0 ? { width: ` ${playerHpWidth}%` }:{ width: "0%", paddingRight: "0px" } }
+                style={
+                  playerHP > 0
+                    ? { width: ` ${playerHpWidth}%` }
+                    : { width: "0%", paddingRight: "0px" }
+                }
               ></div>
               <div className="playerHPNumber">
-              {playerHP > 0 ? playerHP : 0}/{playerMaxHP}
+                {playerHP > 0 ? playerHP : 0}/{playerMaxHP}
               </div>
             </div>
           </td>
@@ -151,11 +152,11 @@ const BattleScreen = () => {
               />
               <SkillBar skills={chosenSkills} gameState={gameState} />
               <ReactTooltip
-        id="toolTip"
-        place="bottom"
-        effect="solid"
-        getContent={(dataTip) => `${dataTip}`}
-      ></ReactTooltip>
+                id="toolTip"
+                place="bottom"
+                effect="solid"
+                getContent={(dataTip) => `${dataTip}`}
+              ></ReactTooltip>
             </div>
           </td>
         </tr>

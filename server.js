@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const monsterController = require("./controllers/monsterController");
 const weaponController = require("./controllers/weaponController");
+const scoresController = require("./controllers/scoresController");
 
 //* config
 const app = express();
@@ -35,7 +36,8 @@ app.use(urlencoded({ extended: false }));
 
 //* Middleware for routes
 app.use("/api/monster", monsterController);
-app.use("/api/weapon", weaponController)
+app.use("/api/weapon", weaponController);
+app.use("/api/scores", scoresController)
 
 //* routes
 app.use("/api/test", (req, res) => {

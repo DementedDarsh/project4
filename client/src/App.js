@@ -7,6 +7,8 @@ import MainScreen from "./Components/MainScreens/MainMenu";
 import BattleScreen from "./Components/MainScreens/BattleScreen";
 import SkillSelect from "./Components/MainScreens/SkillSelect";
 import Game from "./Components/MainScreens/Game";
+import GameOver from "./Components/MainScreens/GameOver";
+import HighScores from "./Components/HighScores/HighScores";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
       <Route path="/game" element={<Game />}>
         <Route path="battle" element={<BattleScreen />} />
         <Route path="skills" element={<SkillSelect />} />
+        <Route path="gameover" element={<GameOver />} />
       </Route>
+      <Route path="/highscores" element={<HighScores/>} />
       <Route path="/monster/create" element={<MonsterCreator />} />
       <Route path="/weapon/create" element={<WeaponCreator />} />
     </Routes>

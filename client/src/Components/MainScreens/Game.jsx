@@ -1,13 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-const skills = require("../../LocalDatabase/skills");
 
 const Game = () => {
-
+  const [level, setLevel] = useState(1);
   const [chosenSkills, setChosenSkills] = useState([]);
 
-  const context = [chosenSkills, setChosenSkills]
+  const context = [level, setLevel]
   return (
     <div>
       <Outlet context={context} />

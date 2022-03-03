@@ -7,6 +7,7 @@ import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
 
+
 const MonsterCreator = () => {
   //DEFINING VARIABLES
   const [availableStatPoints, setAvailableStatPoints] = useState(20);

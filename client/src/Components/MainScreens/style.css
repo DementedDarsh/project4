@@ -74,3 +74,21 @@ body {
   background: linear-gradient(rgb(27, 27, 27), rgb(0, 0, 0));
     font-family: 'Skranji', cursive;
   }  
+
+  input {
+    background: radial-gradient(circle, #a31919, #8b0000);
+    color: gold;
+    font-size: 80px;
+    height: 100px;
+    width: 180px;
+    border-top: 4px ridge #ffb000;
+    border-left: 4px groove #ffb000;
+    border-right: 4px ridge #ffb000;
+    border-bottom: 4px groove #ffb000;
+    font-family: "Skranji", cursive;
+
+  }
+
+  input::-webkit-calendar-picker-indicator {
+    display: none;
+  }
