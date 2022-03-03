@@ -85,7 +85,7 @@ const setNewMonster = (gameState) => {
     defense: (prevState.defense * multiplier) / 10,
   }));
   gameState.setMonsterHP(gameState.monsters[random].hp);
-  gameState.setMonsterHP((prevState) => (prevState * multiplier)/10)
+  gameState.setMonsterHP((prevState) => (prevState * multiplier) / 10);
   const newMonsterString = `A wild ${gameState.monsters[random].name} appeared!`;
   combatLogAdd(gameState, newMonsterString);
 };
@@ -170,4 +170,4 @@ const skills = [
   },
 ];
 
-module.exports = { skills };
+export { skills as skills };
