@@ -129,13 +129,13 @@ const skills = [
               (prevState) => prevState - (x + critDamage)
             );
             newMonsterHP = newMonsterHP - (x + critDamage);
-            if (gameState.lifeSteal) {
-              lifeStealOnHit(gameState, critDamage);
-            }
             combatLogAdd(
               gameState,
               `Critical Hit! You dealt ${critDamage} damage with your weapon, and an additional ${x} burn damage!`
             );
+            if (gameState.lifeSteal) {
+              lifeStealOnHit(gameState, critDamage);
+            }
           } else {
             const damage =
               gameState.currentWeapon.weaponDamage >
@@ -147,13 +147,14 @@ const skills = [
               (prevState) => prevState - (x + damage)
             );
             newMonsterHP = newMonsterHP - (x + damage);
-            if (gameState.lifeSteal) {
-              lifeStealOnHit(gameState, damage);
-            }
+
             combatLogAdd(
               gameState,
               `You dealt ${damage} damage with your weapon, and an additional ${x} burn damage!`
             );
+            if (gameState.lifeSteal) {
+              lifeStealOnHit(gameState, damage);
+            }
           }
         } else {
           combatLogAdd(gameState, `Your attack missed!`);
@@ -169,7 +170,50 @@ const skills = [
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645849941/project4/ky8zcy7eryeloiyexfwu.png",
     effect: async (gameState) => {
-      test(gameState);
+      gameState.setDisabled(true);
+      let newMonsterHP = gameState.monsterHP;
+      for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
+        const x = 20;
+        const crit = await critCalc(gameState);
+        if (crit === true) {
+          const critDamage =
+            gameState.currentWeapon.weaponDamage * 2 >
+            gameState.currentMonster.defense
+              ? gameState.currentWeapon.weaponDamage * 2 -
+                gameState.currentMonster.defense
+              : 0;
+          await gameState.setMonsterHP((prevState) => prevState - critDamage);
+          newMonsterHP = newMonsterHP - critDamage;
+
+          combatLogAdd(
+            gameState,
+            `Critical Hit! You dealt ${critDamage} damage with your weapon!`
+          );
+          if (gameState.lifeSteal) {
+            lifeStealOnHit(gameState, critDamage);
+          }
+        } else {
+          const damage =
+            gameState.currentWeapon.weaponDamage >
+            gameState.currentMonster.defense
+              ? gameState.currentWeapon.weaponDamage -
+                gameState.currentMonster.defense
+              : 0;
+          await gameState.setMonsterHP((prevState) => prevState - (x + damage));
+          newMonsterHP = newMonsterHP - (x + damage);
+
+          combatLogAdd(
+            gameState,
+            `You dealt ${damage} damage with your weapon!`
+          );
+          if (gameState.lifeSteal) {
+            lifeStealOnHit(gameState, damage);
+          }
+        }
+
+        await interval();
+      }
+      await playerEnd(gameState, newMonsterHP);
       // const skill = (currentWeapon, states) => console.log(currentWeapon);
       // await hitAmount(skill, currentWeapon, states);
       //   states(false);

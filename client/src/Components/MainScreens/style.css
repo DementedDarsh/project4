@@ -77,6 +77,17 @@ body {
 
   input {
     background: radial-gradient(circle, #a31919, #8b0000);
+    border-radius: 2px;
+    color: gold;
+    border-top: 2px ridge #ffb000;
+    border-left: 2px groove #ffb000;
+    border-right: 2px ridge #ffb000;
+    border-bottom: 2px groove #ffb000;
+    font-family: "Skranji", cursive;
+  }
+
+  .initials {
+    background: radial-gradient(circle, #a31919, #8b0000);
     color: gold;
     font-size: 80px;
     height: 100px;

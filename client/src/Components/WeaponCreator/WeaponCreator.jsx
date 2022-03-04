@@ -138,7 +138,7 @@ const WeaponCreator = () => {
     const increaseFormikValue = (prevState) => prevState + 10;
     const decreaseFormikValue = (prevState) => prevState - 10;
     if (type === "increase") {
-      if (availableStatPoints >= 1) {
+      if (availableStatPoints >= 1 && weaponStats.critRate < 100) {
         setWeaponStats((prevState) => ({
           ...prevState,
           critRate: prevState.critRate + 10,
@@ -170,7 +170,7 @@ const WeaponCreator = () => {
     const increaseFormikValue = (prevState) => prevState + 20;
     const decreaseFormikValue = (prevState) => prevState - 20;
     if (type === "increase") {
-      if (availableStatPoints >= 1) {
+      if (availableStatPoints >= 1 && weaponStats.hitRate < 100) {
         setWeaponStats((prevState) => ({
           ...prevState,
           hitRate: prevState.hitRate + 20,
