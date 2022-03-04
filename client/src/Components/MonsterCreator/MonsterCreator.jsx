@@ -6,7 +6,8 @@ import { useFormik, Formik } from "formik";
 import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
-
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
 
 const MonsterCreator = () => {
   //DEFINING VARIABLES
@@ -65,9 +66,9 @@ const MonsterCreator = () => {
             killCount: 0,
           };
           console.log(monster);
-          // navigate(`../${userContext.username}/posts/${result._id}`, {
-          //   replace: false,
-          // });
+          navigate(`/`, {
+            replace: false,
+          });
         }
       });
     },

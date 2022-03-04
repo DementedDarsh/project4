@@ -6,6 +6,8 @@ import { useFormik, Formik } from "formik";
 import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
 
 const WeaponCreator = () => {
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
@@ -30,44 +32,44 @@ const WeaponCreator = () => {
     validationSchema: validateSchema,
     onSubmit: async (values) => {
       console.log("submitted values: ", values);
-        axios({
-          method: "post",
-          url: "/api/weapon/new",
-          data: values,
-        }).then((response) => {
-          console.log(response);
-          if (response.data.status === "not ok") {
-            console.log("Error before submitting:" + response.data.message);
-            // const newMsg =
-            //   response.data.message.charAt(0).toUpperCase() +
-            //   response.data.message.slice(1);
-            // setMessage(newMsg);
-          } else {
-            const result = response.data.data;
-            let weapon = {
-              imagePath: "",
-              name: "",
-              weaponDamage: 10,
-              attackSpeed: 1,
-              critRate: 10,
-              hitRate: 20,
-            };
-            console.log(result);
-            weapon = {
-              ...weapon,
-              imagePath: "",
-              name: "",
-              weaponDamage: 10,
-              attackSpeed: 1,
-              critRate: 10,
-              hitRate: 20,
-            };
-            console.log(weapon);
-          //   navigate(`../${userContext.username}/posts/${result._id}`, {
-          //     replace: false,
-          //   });
-          }
-        });
+      axios({
+        method: "post",
+        url: "/api/weapon/new",
+        data: values,
+      }).then((response) => {
+        console.log(response);
+        if (response.data.status === "not ok") {
+          console.log("Error before submitting:" + response.data.message);
+          // const newMsg =
+          //   response.data.message.charAt(0).toUpperCase() +
+          //   response.data.message.slice(1);
+          // setMessage(newMsg);
+        } else {
+          const result = response.data.data;
+          let weapon = {
+            imagePath: "",
+            name: "",
+            weaponDamage: 10,
+            attackSpeed: 1,
+            critRate: 10,
+            hitRate: 20,
+          };
+          console.log(result);
+          weapon = {
+            ...weapon,
+            imagePath: "",
+            name: "",
+            weaponDamage: 10,
+            attackSpeed: 1,
+            critRate: 10,
+            hitRate: 20,
+          };
+          console.log(weapon);
+          navigate(`/`, {
+            replace: false,
+          });
+        }
+      });
     },
   });
   const setWeaponDamage = (type) => {
