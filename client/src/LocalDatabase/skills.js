@@ -15,13 +15,13 @@ const test = async (gameState) => {
   }
 };
 
-const hitAmount = async (gameState, skill) => {
-  for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
-    // states(true);
-    skill(gameState);
-    await interval();
-  }
-};
+// const hitAmount = async (gameState, skill) => {
+//   for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
+//     // states(true);
+//     skill(gameState);
+//     await interval();
+//   }
+// };
 
 const hitCalc = async (gameState) => {
   if (gameState.currentWeapon.hitRate > Math.random() * 100) {
@@ -41,6 +41,16 @@ const combatLogAdd = (gameState, string) => {
     document.querySelector(".combatLog").scrollHeight;
 };
 
+const lifeStealOnHit = (gameState, damage) => {
+  gameState.setPlayerHP(
+    gameState.playerHP + damage / 2 > 1000
+      ? 1000
+      : (prevState) => prevState + damage / 2
+  );
+  combatLogAdd(gameState, `Your attack healed you for ${damage / 2} HP!`);
+  gameState.setLifeSteal(false);
+};
+
 const monsterAttack = async (gameState) => {
   await interval();
   const x = gameState.currentMonster.attack;
@@ -51,7 +61,7 @@ const monsterAttack = async (gameState) => {
   combatLogAdd(gameState, combatLogEntry);
   if (gameState.playerHP - x < 0) {
     combatLogAdd(gameState, "You died");
-    gameState.playerLoseGame();
+    await gameState.playerLoseGame();
   }
   await gameState.setDisabled(false);
 };
@@ -109,30 +119,40 @@ const skills = [
         if (hit === true) {
           const crit = await critCalc(gameState);
           if (crit === true) {
+            const critDamage =
+              gameState.currentWeapon.weaponDamage * 2 >
+              gameState.currentMonster.defense
+                ? gameState.currentWeapon.weaponDamage * 2 -
+                  gameState.currentMonster.defense
+                : 0;
             await gameState.setMonsterHP(
-              (prevState) =>
-                prevState - (x + gameState.currentWeapon.weaponDamage * 2)
+              (prevState) => prevState - (x + critDamage)
             );
-            newMonsterHP =
-              newMonsterHP - (x + gameState.currentWeapon.weaponDamage * 2);
-            console.log(newMonsterHP);
+            newMonsterHP = newMonsterHP - (x + critDamage);
+            if (gameState.lifeSteal) {
+              lifeStealOnHit(gameState, critDamage);
+            }
             combatLogAdd(
               gameState,
-              `Critical Hit! You dealt ${
-                gameState.currentWeapon.weaponDamage * 2
-              } with your weapon, and an additional ${x} burn damage!`
+              `Critical Hit! You dealt ${critDamage} damage with your weapon, and an additional ${x} burn damage!`
             );
           } else {
+            const damage =
+              gameState.currentWeapon.weaponDamage >
+              gameState.currentMonster.defense
+                ? gameState.currentWeapon.weaponDamage -
+                  gameState.currentMonster.defense
+                : 0;
             await gameState.setMonsterHP(
-              (prevState) =>
-                prevState - (x + gameState.currentWeapon.weaponDamage)
+              (prevState) => prevState - (x + damage)
             );
-            newMonsterHP =
-              newMonsterHP - (x + gameState.currentWeapon.weaponDamage);
-            console.log(newMonsterHP);
+            newMonsterHP = newMonsterHP - (x + damage);
+            if (gameState.lifeSteal) {
+              lifeStealOnHit(gameState, damage);
+            }
             combatLogAdd(
               gameState,
-              `You dealt ${gameState.currentWeapon.weaponDamage} with your weapon, and an additional ${x} burn damage!`
+              `You dealt ${damage} damage with your weapon, and an additional ${x} burn damage!`
             );
           }
         } else {
@@ -167,10 +187,15 @@ const skills = [
   {
     name: "Vampirism",
     tooltipText:
-      "You thirst for blood, on the next attack, you heal life equals to the damage dealt",
+      "You thirst for blood, on the next attack, you heal hit points equals to half of the damage dealt",
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
-    effect: (gameState) => {},
+    effect: async (gameState) => {
+      gameState.setLifeSteal(true);
+      let newMonsterHP = gameState.monsterHP;
+      combatLogAdd(gameState, "You prepare to drain your opponent's life");
+      await playerEnd(gameState, newMonsterHP);
+    },
   },
 ];
 

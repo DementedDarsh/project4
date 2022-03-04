@@ -14,7 +14,7 @@ const HighScores = () => {
   }, []);
 
   const sortedScores = scoreList?.sort((a, b) => b.score - a.score);
-  const highScores = sortedScores?.map((item, index) => {
+  const highScores = sortedScores?.slice(0,20).map((item, index) => {
     return (
       <tr key={index}>
         <td>{index+1}</td>

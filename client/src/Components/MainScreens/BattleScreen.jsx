@@ -90,7 +90,9 @@ const BattleScreen = () => {
     setCombatLog: setCombatLog,
     disabled: disabled,
     setDisabled: setDisabled,
-    playerLoseGame: playerLoseGame
+    playerLoseGame: playerLoseGame,
+    setLifeSteal: setLifeSteal,
+    lifeSteal: lifeSteal
   };
 
   return (
@@ -113,7 +115,6 @@ const BattleScreen = () => {
               textAlign: "center",
             }}
           >
-            Level: {level}
             <Monster currentMonster={currentMonster} hp={monsterHP} />
             <div className="player-HPBar">
               <div
@@ -159,6 +160,7 @@ const BattleScreen = () => {
               ></ReactTooltip>
             </div>
           </td>
+          <td> <div className="statPoints" style={{textAlign: "center", marginTop: "auto", fontSize: "40px"}}><p style={{fontSize: "15px", marginTop: "5px", marginBottom: "-8px"}}>Level: </p>{level}</div></td>
         </tr>
       </tbody>
     </table>
