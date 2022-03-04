@@ -7,10 +7,10 @@ import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
 
 const MonsterCreator = () => {
   //DEFINING VARIABLES
+  const navigate = useNavigate();
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
   const minimumMonsterStats = {
     imagePath: "",
@@ -186,12 +186,16 @@ const MonsterCreator = () => {
 
   return (
     <>
-      <table style={{ marginLeft: "50px", marginTop: "30px"}}>
+      <table style={{ marginLeft: "50px", marginTop: "30px" }}>
         <thead>
           <tr>
             <th>
-              <p style={{fontSize: "40px", marginTop: "85px"}}>Create a monster!</p>
-              <div style={{marginTop: "80px", textAlign: "left"}}><NameEdit handleChange={formik.handleChange} /></div>
+              <p style={{ fontSize: "40px", marginTop: "85px" }}>
+                Create a monster!
+              </p>
+              <div style={{ marginTop: "80px", textAlign: "left" }}>
+                <NameEdit handleChange={formik.handleChange} />
+              </div>
             </th>
             <th>
               <ImageUpload formik={formik} name={"imagePath"} />
@@ -207,15 +211,31 @@ const MonsterCreator = () => {
               </table>
             </td>
             <td style={{ textAlign: "center" }}>
-              <div className="statPoints" style={{marginTop: "130px", fontSize: "40px"}}><p style={{fontSize: "15px", marginTop: "5px", marginBottom: "-8px"}}>Stat Points: </p>{availableStatPoints}</div>
-              <div style={{marginTop: "140px"}}>
-              <form onSubmit={formik.handleSubmit}><button
-                  type="submit"
-                  className="buttonSubmit"
-                  disabled={availableStatPoints > 0}
+              <div
+                className="statPoints"
+                style={{ marginTop: "130px", fontSize: "40px" }}
+              >
+                <p
+                  style={{
+                    fontSize: "15px",
+                    marginTop: "5px",
+                    marginBottom: "-8px",
+                  }}
                 >
-                  Submit
-                </button></form>
+                  Stat Points:{" "}
+                </p>
+                {availableStatPoints}
+              </div>
+              <div style={{ marginTop: "140px" }}>
+                <form onSubmit={formik.handleSubmit}>
+                  <button
+                    type="submit"
+                    className="buttonSubmit"
+                    disabled={availableStatPoints > 0}
+                  >
+                    Submit
+                  </button>
+                </form>
               </div>
             </td>
           </tr>

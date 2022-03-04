@@ -7,9 +7,9 @@ import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
 
 const WeaponCreator = () => {
+  const navigate = useNavigate();
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
   const minimumWeaponStats = {
     imagePath: "",

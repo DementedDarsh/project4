@@ -221,11 +221,42 @@ const skills = [
   },
   {
     name: "Rend Armor",
-    tooltipText: "Destroys the target's defenses",
+    tooltipText:
+      "This technique destroys its targets armor, reducing its defenses. However, it cannot deal a critical hit.",
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
-    effect: (currentWeapon, states) => {
-      console.log("Destroys the target's defenses");
+    effect: async (gameState) => {
+      gameState.setDisabled(true);
+      let newMonsterHP = gameState.monsterHP;
+      for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
+        const hit = await hitCalc(gameState);
+        if (hit === true) {
+          const damage =
+            gameState.currentWeapon.weaponDamage >
+            gameState.currentMonster.defense
+              ? gameState.currentWeapon.weaponDamage -
+                gameState.currentMonster.defense
+              : 0;
+          await gameState.setMonsterHP((prevState) => prevState - damage);
+          newMonsterHP = newMonsterHP - damage;
+          const x = Math.floor(Math.random() * 10);
+          await gameState.setCurrentMonster((prevState) => ({
+            ...prevState,
+            defense: prevState.defense - 10,
+          }));
+          combatLogAdd(
+            gameState,
+            `You dealt ${damage} damage with your weapon, and destroyed ${x} points of the monster's defense`
+          );
+          if (gameState.lifeSteal) {
+            lifeStealOnHit(gameState, damage);
+          }
+        } else {
+          combatLogAdd(gameState, `Your attack missed!`);
+        }
+        await interval();
+      }
+      await playerEnd(gameState, newMonsterHP);
     },
   },
   {
