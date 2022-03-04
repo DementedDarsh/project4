@@ -224,7 +224,7 @@ const skills = [
     tooltipText:
       "This technique destroys its targets armor, reducing its defenses. However, it cannot deal a critical hit.",
     imagePath:
-      "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
+      "https://res.cloudinary.com/djtovzgnc/image/upload/v1646393085/project4/w2y0oxnwjphezyoax3l0.png",
     effect: async (gameState) => {
       gameState.setDisabled(true);
       let newMonsterHP = gameState.monsterHP;
@@ -239,10 +239,10 @@ const skills = [
               : 0;
           await gameState.setMonsterHP((prevState) => prevState - damage);
           newMonsterHP = newMonsterHP - damage;
-          const x = Math.floor(Math.random() * 10);
+          const x = Math.ceil(Math.random() * 5) + 5;
           await gameState.setCurrentMonster((prevState) => ({
             ...prevState,
-            defense: prevState.defense - 10,
+            defense: prevState.defense - x,
           }));
           combatLogAdd(
             gameState,
@@ -266,9 +266,26 @@ const skills = [
     imagePath:
       "https://res.cloudinary.com/djtovzgnc/image/upload/v1645850009/project4/ip1rj8igc0aunx3jnn8d.png",
     effect: async (gameState) => {
+      interval();
       gameState.setLifeSteal(true);
       let newMonsterHP = gameState.monsterHP;
       combatLogAdd(gameState, "You prepare to drain your opponent's life");
+      await playerEnd(gameState, newMonsterHP);
+    },
+  },
+  {
+    name: "Healing Chakra",
+    tooltipText: "You heal yourself",
+    imagePath:
+      "https://res.cloudinary.com/djtovzgnc/image/upload/v1646392956/project4/pxuqqqzxofyyzh2lmglz.png",
+    effect: async (gameState) => {
+      interval();
+      const x = Math.ceil(Math.random() * 200 + 100);
+      gameState.setPlayerHP(
+        gameState.playerHP + x > 1000 ? 1000 : (prevState) => prevState + x
+      );
+      let newMonsterHP = gameState.monsterHP;
+      combatLogAdd(gameState, `You healed ${x} HP!`);
       await playerEnd(gameState, newMonsterHP);
     },
   },

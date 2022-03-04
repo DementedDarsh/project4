@@ -57,22 +57,20 @@ const BattleScreen = () => {
       );
     };
 
-    const getPlayer = () => {
+    const getPlayer = async () => {
       if (localStorage.getItem("skills")) {
-        setChosenSkills(JSON.parse(localStorage.getItem("skills")));
+        await setChosenSkills(JSON.parse(localStorage.getItem("skills")));
       }
+      ReactTooltip.rebuild();
       //   setChosenSkills(JSON.parse(localStorage.skills));
       //   setPlayerHP(parseInt(localStorage.playerHP))
     };
-
     getMonsters();
     getWeapons();
     getPlayer();
   }, []);
 
-  const onTest = () => {
-    console.log(skills.find((item) => item.name === "Vampirism").effect);
-  };
+  const weaponStats = `Weapon Damage: ${currentWeapon.weaponDamage} <br /> Attack Speed: ${currentWeapon.attackSpeed} <br /> Hit Rate ${currentWeapon.hitRate} <br /> Crit Rate: ${currentWeapon.critRate}`;
 
   const gameState = {
     weapons: weapons,
@@ -92,7 +90,7 @@ const BattleScreen = () => {
     setDisabled: setDisabled,
     playerLoseGame: playerLoseGame,
     setLifeSteal: setLifeSteal,
-    lifeSteal: lifeSteal
+    lifeSteal: lifeSteal,
   };
 
   return (
@@ -137,7 +135,7 @@ const BattleScreen = () => {
         <tr>
           <td>
             <div className="toolbar">
-              <span data-for="toolTip" data-tip={currentWeapon.weaponDamage}>
+              <span data-for="toolTip" data-tip={weaponStats}>
                 <img
                   src={currentWeapon?.imagePath}
                   style={{ maxHeight: "120px", maxWidth: "120px" }}
@@ -145,22 +143,38 @@ const BattleScreen = () => {
                 <br />
                 {currentWeapon.name}
               </span>
-              <ReactTooltip
-                id="toolTip"
-                place="bottom"
-                effect="solid"
-                getContent={(dataTip) => `${dataTip}`}
-              />
               <SkillBar skills={chosenSkills} gameState={gameState} />
-              <ReactTooltip
-                id="toolTip"
-                place="bottom"
-                effect="solid"
-                getContent={(dataTip) => `${dataTip}`}
-              ></ReactTooltip>
+            </div>
+            <ReactTooltip
+              id="toolTip"
+              place="top"
+              effect="solid"
+              html={true}
+              getContent={(dataTip) => `${dataTip}`}
+            />
+          </td>
+          <td>
+            {" "}
+            <div
+              className="statPoints"
+              style={{
+                textAlign: "center",
+                marginTop: "auto",
+                fontSize: "40px",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "15px",
+                  marginTop: "5px",
+                  marginBottom: "-8px",
+                }}
+              >
+                Level:{" "}
+              </p>
+              {level}
             </div>
           </td>
-          <td> <div className="statPoints" style={{textAlign: "center", marginTop: "auto", fontSize: "40px"}}><p style={{fontSize: "15px", marginTop: "5px", marginBottom: "-8px"}}>Level: </p>{level}</div></td>
         </tr>
       </tbody>
     </table>
