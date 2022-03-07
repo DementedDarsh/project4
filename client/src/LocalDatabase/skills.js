@@ -173,7 +173,6 @@ const skills = [
       gameState.setDisabled(true);
       let newMonsterHP = gameState.monsterHP;
       for (let i = 0; i < gameState.currentWeapon.attackSpeed; i++) {
-        const x = 20;
         const crit = await critCalc(gameState);
         if (crit === true) {
           const critDamage =
@@ -199,9 +198,8 @@ const skills = [
               ? gameState.currentWeapon.weaponDamage -
                 gameState.currentMonster.defense
               : 0;
-          await gameState.setMonsterHP((prevState) => prevState - (x + damage));
-          newMonsterHP = newMonsterHP - (x + damage);
-
+          await gameState.setMonsterHP((prevState) => prevState - damage);
+          newMonsterHP = newMonsterHP - (damage);
           combatLogAdd(
             gameState,
             `You dealt ${damage} damage with your weapon!`

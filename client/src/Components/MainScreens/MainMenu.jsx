@@ -17,7 +17,9 @@ const MainMenu = () => {
         </Link>
       </div>
       <div>
+      <Link to={`/topMonsters`}>
         <button className="button">Top Monsters</button>
+        </Link>
       </div>
       <div>
         <Link to={`/monster/create`}>

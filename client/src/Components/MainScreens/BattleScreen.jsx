@@ -31,8 +31,10 @@ const BattleScreen = () => {
   const playerHpWidth = playerHP > 0 ? (playerHP * 100) / playerMaxHP : 0;
   const navigate = useNavigate();
 
-  const playerLoseGame = () => {
+  const playerLoseGame = async () => {
+    await monsterKill();
     navigate("/game/gameover", { replace: false });
+    // formik.setFieldValue("killCount", currentMonster.killCount + 1);
   };
 
   useEffect(() => {
@@ -69,6 +71,31 @@ const BattleScreen = () => {
     getWeapons();
     getPlayer();
   }, []);
+
+  const monsterKill = async () => {
+    console.log(currentMonster._id);
+    // const index = totalLikes?.findIndex((like) => {
+    //   return like === userID;
+    // });
+    // if (index === -1) {
+    //   const userArr = [userID];
+
+    //   const newTotalLikes = totalLikes.concat(userArr);
+    //   setTotalLikes(newTotalLikes);
+    await axios.put(`/api/monster/killIncrease/${currentMonster._id}`);
+    axios({
+      method: "put",
+      url: `/api/monster/killIncrease/${currentMonster._id}`,
+    }).then((response) => {
+      console.log(response);
+    });
+    // } else {
+    //   const newTotalLikes = totalLikes?.filter((likes, i) => i !== index);
+    //   setTotalLikes(newTotalLikes);
+    //   await axios.put(`/api/images/${postID}/unlike`);
+    // }
+    // setIsUpdatedData(false);
+  };
 
   const weaponStats = `Weapon Damage: ${currentWeapon.weaponDamage} <br /> Attack Speed: ${currentWeapon.attackSpeed} <br /> Hit Rate ${currentWeapon.hitRate} <br /> Crit Rate: ${currentWeapon.critRate}`;
 
