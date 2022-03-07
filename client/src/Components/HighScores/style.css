@@ -9,7 +9,7 @@
     text-align: center;
   }
 
-  thead {
+.monsterCardthead {
     background: radial-gradient(circle, #a31919, #8b0000);}
 
 .monsterCard img {

@@ -10,11 +10,13 @@ import Game from "./Components/MainScreens/Game";
 import GameOver from "./Components/MainScreens/GameOver";
 import HighScores from "./Components/HighScores/HighScores";
 import TopMonsters from "./Components/HighScores/TopMonsters";
+import AdminLogin from "./Components/AdminLogin/AdminLogin";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainScreen />} />
+      <Route path="/login" element={<AdminLogin />} />
       <Route path="/game" element={<Game />}>
         <Route path="battle" element={<BattleScreen />} />
         <Route path="skills" element={<SkillSelect />} />

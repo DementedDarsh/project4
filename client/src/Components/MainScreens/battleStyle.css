@@ -62,3 +62,8 @@
   width: auto;
   max-width: 150px;
 }
+
+.battleArea{
+  background-image: url(https://res.cloudinary.com/djtovzgnc/image/upload/v1646620389/project4/i4ecv2nnavuqcxgnenfj.jpg);
+  background-size: cover;
+}

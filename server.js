@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const monsterController = require("./controllers/monsterController");
 const weaponController = require("./controllers/weaponController");
 const scoresController = require("./controllers/scoresController");
+const adminController = require("./controllers/adminController")
 
 //* config
 const app = express();
@@ -37,7 +38,8 @@ app.use(urlencoded({ extended: false }));
 //* Middleware for routes
 app.use("/api/monster", monsterController);
 app.use("/api/weapon", weaponController);
-app.use("/api/scores", scoresController)
+app.use("/api/scores", scoresController);
+app.use("/api/admin", adminController);
 
 //* routes
 app.use("/api/test", (req, res) => {

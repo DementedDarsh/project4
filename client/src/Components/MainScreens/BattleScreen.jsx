@@ -33,6 +33,9 @@ const BattleScreen = () => {
 
   const playerLoseGame = async () => {
     await monsterKill();
+    setTimeout(() => {
+        console.log("You died");
+      }, 1000);
     navigate("/game/gameover", { replace: false });
     // formik.setFieldValue("killCount", currentMonster.killCount + 1);
   };
@@ -73,7 +76,7 @@ const BattleScreen = () => {
   }, []);
 
   const monsterKill = async () => {
-    console.log(currentMonster._id);
+      console.log(currentMonster._id);
     // const index = totalLikes?.findIndex((like) => {
     //   return like === userID;
     // });
@@ -82,13 +85,13 @@ const BattleScreen = () => {
 
     //   const newTotalLikes = totalLikes.concat(userArr);
     //   setTotalLikes(newTotalLikes);
-    await axios.put(`/api/monster/killIncrease/${currentMonster._id}`);
-    axios({
-      method: "put",
-      url: `/api/monster/killIncrease/${currentMonster._id}`,
-    }).then((response) => {
-      console.log(response);
-    });
+      await axios.put(`/api/monster/killIncrease/${currentMonster._id}`);
+      axios({
+        method: "put",
+        url: `/api/monster/killIncrease/${currentMonster._id}`,
+      }).then((response) => {
+        console.log(response);
+      });
     // } else {
     //   const newTotalLikes = totalLikes?.filter((likes, i) => i !== index);
     //   setTotalLikes(newTotalLikes);
