@@ -18,11 +18,11 @@ const HighScores = () => {
   const highScores = sortedScores?.slice(0,20) .map((item, index) => {
     return (
       <tr key={index}>
-        <td classname="score">{index+1}</td>
-        <td classname="score">{item.initialA}</td>
-        <td classname="score">{item.initialB}</td>
-        <td classname="score">{item.initialC}</td>
-        <td classname="score">{item.score}</td>
+        <td classname="score" style={{fontSize: "40px"}}>{index+1}</td>
+        <td classname="score" style={{fontSize: "40px"}}>{item.initialA}</td>
+        <td classname="score" style={{fontSize: "40px"}}>{item.initialB}</td>
+        <td classname="score" style={{fontSize: "40px"}}>{item.initialC}</td>
+        <td classname="score" style={{fontSize: "40px"}}>{item.score}</td>
       </tr>
     );
   });
@@ -30,8 +30,8 @@ const HighScores = () => {
   return (
     <div>
       <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
-      <table style={{border: "1px solid gold", width: "60%", textAlign: "center"}}>
-          <thead><tr><th>#</th><th colSpan={3}>Name</th><th>Score</th></tr></thead>
+      <table className="scoreTable" style={{border: "1px solid gold", width: "60%", textAlign: "center"}}>
+          <thead className="scoreHead"><tr><th>#</th><th colSpan={3}>Name</th><th>Score</th></tr></thead>
         <tbody>{highScores}</tbody>
       </table>
     </div>

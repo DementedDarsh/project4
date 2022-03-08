@@ -64,7 +64,7 @@ const AdminLogin = () => {
               onBlur={formik.handleBlur}
               type="text"
             /> */}
-          <input
+          <label>Nothing to see here: <input
             //   dot={true}
             error={formik.touched?.password && formik.errors?.password}
             //   icon={<LockIcon />}
@@ -73,7 +73,7 @@ const AdminLogin = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             type="password"
-          />
+          /></label>
           <p>{message}</p>
           <button className="buttonSubmit"
             //   className="mt-8 bg-black disabled:bg-gray-200 active:bg-gray-900 focus:outline-none text-white rounded px-4 py-1"

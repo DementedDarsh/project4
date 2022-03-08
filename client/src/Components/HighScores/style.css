@@ -1,29 +1,42 @@
 .monsterCard {
-    border-radius: 4px;
-    color: gold;
-    border-top: 2px ridge #ffb000;
-    border-left: 2px groove #ffb000;
-    border-right: 2px ridge #ffb000;
-    border-bottom: 2px groove #ffb000;
-    font-family: "Skranji", cursive;
-    text-align: center;
-  }
+  border-radius: 4px;
+  color: gold;
+  border-top: 2px ridge #ffb000;
+  border-left: 2px groove #ffb000;
+  border-right: 2px ridge #ffb000;
+  border-bottom: 2px groove #ffb000;
+  font-family: "Skranji", cursive;
+  text-align: center;
+}
 
 .monsterCardthead {
-    background: radial-gradient(circle, #a31919, #8b0000);}
+  background: radial-gradient(circle, #a31919, #8b0000);
+}
+.scoreHead {
+  background: radial-gradient(circle, #a31919, #8b0000);
+  border-radius: 4px;
+  color: gold;
+  border-top: 4px ridge #ffb000;
+  border-left: 4px groove #ffb000;
+  border-right: 4px ridge #ffb000;
+  border-bottom: 4px groove #ffb000;
+  font-family: "Skranji", cursive;
+  text-align: center;
+}
+
+
 
 .monsterCard img {
-    width: 200px;
-    height: auto;
+  width: 200px;
+  height: auto;
 }
 
 .container {
-    display: flex;
-    flex-direction: row ;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-td.score {
-    font-size: xx-large;
+.score {
+  font-size: xx-large;
 }
-
