@@ -6,7 +6,7 @@ import logo from "../MainScreens/logo.png";
 const MainMenu = () => {
   return (
     <div style={{ textAlign: "center" }}>
-      <img className="logo" src={logo} />
+      <img className="logo" src={logo} style={{marginTop: "-50px"}}/>
       <p>The Reckoning</p>
       <Link to={`/game/skills`}>
         <button className="button start">Start Game</button>
@@ -17,8 +17,8 @@ const MainMenu = () => {
         </Link>
       </div>
       <div>
-      <Link to={`/topMonsters`}>
-        <button className="button">Top Monsters</button>
+        <Link to={`/topMonsters`}>
+          <button className="button">Top Monsters</button>
         </Link>
       </div>
       <div>
@@ -27,6 +27,12 @@ const MainMenu = () => {
         </Link>
         <Link to={`/weapon/create`}>
           <button className="button">Create a Weapon</button>
+        </Link>
+      </div>
+      <div>
+        {" "}
+        <Link to={`/admin/login`}>
+          <button className="button secret">Don't Click This</button>
         </Link>
       </div>
     </div>

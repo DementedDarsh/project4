@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HighScores = () => {
   const [scoreList, setScoreList] = useState();
@@ -14,21 +15,21 @@ const HighScores = () => {
   }, []);
 
   const sortedScores = scoreList?.sort((a, b) => b.score - a.score);
-  const highScores = sortedScores?.slice(0,20).map((item, index) => {
+  const highScores = sortedScores?.slice(0,20) .map((item, index) => {
     return (
       <tr key={index}>
-        <td>{index+1}</td>
-        <td>{item.initialA}</td>
-        <td>{item.initialB}</td>
-        <td>{item.initialC}</td>
-        <td>{item.score}</td>
+        <td classname="score">{index+1}</td>
+        <td classname="score">{item.initialA}</td>
+        <td classname="score">{item.initialB}</td>
+        <td classname="score">{item.initialC}</td>
+        <td classname="score">{item.score}</td>
       </tr>
     );
   });
 
   return (
     <div>
-      HighScores
+      <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
       <table style={{border: "1px solid gold", width: "60%", textAlign: "center"}}>
           <thead><tr><th>#</th><th colSpan={3}>Name</th><th>Score</th></tr></thead>
         <tbody>{highScores}</tbody>

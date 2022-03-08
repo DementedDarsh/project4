@@ -22,3 +22,8 @@
     flex-direction: row ;
     flex-wrap: wrap;
 }
+
+td.score {
+    font-size: xx-large;
+}
+

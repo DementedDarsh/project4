@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MonsterList = () => {
   const [monsterList, setMonsterList] = useState();
   const [update, setUpdate] = useState(false)
-
+  const navigate = useNavigate()
   useEffect(() => {
     const getKillCount = async () => {
       const killData = await (
@@ -23,7 +23,10 @@ const deleteMonster = async (url) => {
     method: 'DELETE',
     url: url,
   });
-  setUpdate(prevState => !prevState)
+  // setUpdate(prevState => !prevState);
+  navigate(`/admin/monsters`, {
+    replace: false,
+  });
 }
 
   const monsters = monsterList?.map((item, index) => {

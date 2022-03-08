@@ -1,6 +1,6 @@
 import { forwardRef, useContext, useState } from "react";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 // import { DataContext } from "../../App";
@@ -41,6 +41,8 @@ const AdminLogin = () => {
         //     password: result.password,
         //   };
           console.log(result);
+          if(response.data.status === "ok"){
+          navigate("/admin/monsters")}
           // localStorage.setItem("userContext", JSON.stringify(user));
           // setUserContext(user);
         //   navigate(-1, { replace: false });
@@ -52,6 +54,7 @@ const AdminLogin = () => {
   return (
     <div>
       <div>
+      <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
         <form onSubmit={formik.handleSubmit}>
           {/* <input
               error={formik.touched?.username && formik.errors?.username}
@@ -72,7 +75,7 @@ const AdminLogin = () => {
             type="password"
           />
           <p>{message}</p>
-          <button
+          <button className="buttonSubmit"
             //   className="mt-8 bg-black disabled:bg-gray-200 active:bg-gray-900 focus:outline-none text-white rounded px-4 py-1"
             type="submit"
             //dirty === not filled up, isValid === validity of all fields

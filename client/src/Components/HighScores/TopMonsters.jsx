@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 const TopMonsters = () => {
   const [killCountList, setKillCountList] = useState();
@@ -17,7 +18,7 @@ const TopMonsters = () => {
   }, []);
 
   const sortedKills = killCountList?.sort((a, b) => b.killCount - a.killCount);
-  const topMonsters = sortedKills?.slice(0, 10).map((item, index) => {
+  const topMonsters = sortedKills?.slice(0, 15).map((item, index) => {
     return (
         
       <table className="monsterCard" key={index}>
@@ -27,7 +28,7 @@ const TopMonsters = () => {
       </table>
     );
   });
-  return <div className="container">{topMonsters}</div>;
+  return <><Link to={`/`}><button className="buttonSubmit">Back</button></Link><div className="container">{topMonsters}</div></>;
 };
 
 export default TopMonsters;
