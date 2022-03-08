@@ -10,7 +10,8 @@ import Game from "./Components/MainScreens/Game";
 import GameOver from "./Components/MainScreens/GameOver";
 import HighScores from "./Components/HighScores/HighScores";
 import TopMonsters from "./Components/HighScores/TopMonsters";
-import AdminLogin from "./Components/AdminLogin/AdminLogin";
+import AdminLogin from "./Components/Admin/AdminLogin";
+import MonsterList from "./Components/Admin/MonsterList";
 
 function App() {
   return (
@@ -22,10 +23,14 @@ function App() {
         <Route path="skills" element={<SkillSelect />} />
         <Route path="gameover" element={<GameOver />} />
       </Route>
-      <Route path="/highscores" element={<HighScores/>} />
-      <Route path="/topMonsters" element={<TopMonsters/>} />
+      <Route path="/highscores" element={<HighScores />} />
+      <Route path="/topMonsters" element={<TopMonsters />} />
       <Route path="/monster/create" element={<MonsterCreator />} />
       <Route path="/weapon/create" element={<WeaponCreator />} />
+      <Route path="/admin">
+        <Route path="login" element={<AdminLogin />} />
+        <Route path="monsters" element={<MonsterList />} />
+      </Route>
     </Routes>
   );
 }

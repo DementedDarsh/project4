@@ -41,11 +41,28 @@ router.post("/new", async (req, res) => {
   }
 });
 
+//* delete image post
+router.delete("/:monsterID", async (req, res) => {
+  const { monsterID } = req.params;
+  // const user = req.session.currentUser;
+  try {
+    // const findMonster = await Monster.findById(monsterID);
+    const deletedMonster = await Monster.findByIdAndDelete(monsterID);
+    res.status(200).json({
+      status: "ok",
+      message: "deleted monster",
+      data: deletedMonster,
+    });
+  } catch (error) {
+    res.json({ status: "not ok", message: error.message });
+  }
+});
+
 // UPDATE - increase kill count
 router.put("/killIncrease/:monsterID", async (req, res) => {
   const { monsterID } = req.params;
   const monster = req.body;
-  console.log(monster)
+  console.log(monster);
   try {
     const foundMonster = await Monster.findById(monsterID);
     foundMonster.killCount += 1;

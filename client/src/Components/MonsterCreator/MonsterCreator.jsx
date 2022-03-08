@@ -6,7 +6,7 @@ import { useFormik, Formik } from "formik";
 import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MonsterCreator = () => {
   //DEFINING VARIABLES
@@ -21,6 +21,7 @@ const MonsterCreator = () => {
     killCount: 0,
   };
   const [monsterStats, setMonsterStats] = useState(minimumMonsterStats);
+  const [message, setMessage] = useState("");
 
   //VALIDATION
   const validateSchema = Yup.object().shape({
@@ -30,7 +31,7 @@ const MonsterCreator = () => {
   // FORM SUBMIT
   const formik = useFormik({
     initialValues: monsterStats,
-    validationSchema: validateSchema,
+    // validationSchema: validateSchema,
     onSubmit: async (values) => {
       console.log("submitted values: ", values);
       axios({
@@ -41,10 +42,10 @@ const MonsterCreator = () => {
         console.log(response);
         if (response.data.status === "not ok") {
           console.log("Error before submitting:" + response.data.message);
-          // const newMsg =
-          //   response.data.message.charAt(0).toUpperCase() +
-          //   response.data.message.slice(1);
-          // setMessage(newMsg);
+          const newMsg =
+            response.data.message.charAt(0).toUpperCase() +
+            response.data.message.slice(1);
+          setMessage(newMsg);
         } else {
           const result = response.data.data;
           let monster = {
@@ -186,6 +187,7 @@ const MonsterCreator = () => {
 
   return (
     <>
+    <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
       <table style={{ marginLeft: "50px", marginTop: "30px" }}>
         <thead>
           <tr>
@@ -227,7 +229,7 @@ const MonsterCreator = () => {
                 {availableStatPoints}
               </div>
               <div style={{ marginTop: "140px" }}>
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} formik={formik}>
                   <button
                     type="submit"
                     className="buttonSubmit"
@@ -235,6 +237,7 @@ const MonsterCreator = () => {
                   >
                     Submit
                   </button>
+                  {message}
                 </form>
               </div>
             </td>

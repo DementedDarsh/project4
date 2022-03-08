@@ -6,7 +6,7 @@ import { useFormik, Formik } from "formik";
 import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const WeaponCreator = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const WeaponCreator = () => {
   const [weaponStats, setWeaponStats] = useState(minimumWeaponStats);
 
   const validateSchema = Yup.object().shape({
-    // imagePath: Yup.string().required("Please upload an image."),
+    imagePath: Yup.string().required("Please upload an image."),
     name: Yup.string().required("Please give your weapon a name!"),
   });
 
@@ -224,7 +224,7 @@ const WeaponCreator = () => {
 
   return (
     <>
-      {" "}
+      <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
       <form onSubmit={formik.handleSubmit}>
         <table style={{ marginLeft: "50px", marginTop: "30px" }}>
           <thead>

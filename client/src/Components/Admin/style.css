@@ -1,0 +1,65 @@
+.monsterCard {
+    border-radius: 4px;
+    color: gold;
+    border-top: 2px ridge #ffb000;
+    border-left: 2px groove #ffb000;
+    border-right: 2px ridge #ffb000;
+    border-bottom: 2px groove #ffb000;
+    font-family: "Skranji", cursive;
+    text-align: center;
+  }
+
+.monsterCard thead {
+    background: radial-gradient(circle, #a31919, #8b0000);}
+
+.monsterCard img {
+    width: 200px;
+    height: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: wrap;
+}
+
+.buttonSubmit {
+    width: 150px;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    font-family: "Skranji", cursive;
+    color: #ffc000;
+    font-size: 15px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+    padding: 2px 2px;
+    background: radial-gradient(circle, #8b0000, #8b0000);
+    border-top: 2px ridge #ffb000;
+    border-left: 2px groove #ffb000;
+    border-right: 2px ridge #ffb000;
+    border-bottom: 2px groove #ffb000;
+    box-shadow: inset 0px 0px 5px 3px rgba(1, 1, 1, 0.3);
+    display: table-cell;
+    vertical-align: bottom;
+  }
+  
+  .buttonSubmit:disabled {
+    color: #acacac;
+    border-top: 2px ridge #acacac;
+    border-left: 2px groove #acacac;
+    border-right: 2px ridge #acacac;
+    border-bottom: 2px groove #acacac;
+    background: radial-gradient(circle, #333030, #3f3d3d);
+  }
+  
+  .buttonSubmit:hover:enabled {
+    background: radial-gradient(circle, #e52b2b, #8b0000);
+    box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+  }
+  
+  .buttonSubmit:active:enabled {
+    background: radial-gradient(circle, #ec6a6a, #e52b2b);
+    box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+  }
+  
