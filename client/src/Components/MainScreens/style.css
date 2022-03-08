@@ -30,6 +30,10 @@ button {
   font-size: 30px;
   padding: 15px 0;
   width: 300px;
+  border-top: 4px ridge #ffb000;
+  border-left: 4px groove #ffb000;
+  border-right: 4px ridge #ffb000;
+  border-bottom: 4px groove #ffb000;
 }
 
 .button.secret {
