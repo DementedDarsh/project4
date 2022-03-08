@@ -110,7 +110,7 @@ const SkillSelect = (props) => {
         <table style={{ width: "500px" }}>
           <tbody>{skillChoices}</tbody>
         </table>{" "}
-      <Link to={`/game/battle`}>  <button onClick={handleSubmit} className="button">
+      <Link to={`/game/battle`}>  <button onClick={handleSubmit} className="buttonSkill" disabled={skillPoints !== 0}>
           battle
         </button></Link>
       </span>
