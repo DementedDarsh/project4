@@ -8,7 +8,7 @@ const SkillBar = (props) => {
       <span key={index} data-for="toolTip" data-tip={item?.tooltipText}>
         <img
           style={
-            props.gameState.disabled === true
+            props.gameState.disabled === true || props.gameState.playerHP <= 0
               ? {
                   pointerEvents: "none",
                   filter: "grayscale(1)",

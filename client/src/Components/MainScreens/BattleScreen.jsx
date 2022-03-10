@@ -36,7 +36,7 @@ const BattleScreen = () => {
     setTimeout(() => {
         console.log("You died");
       }, 1000);
-    navigate("/game/gameover", { replace: false });
+    setTimeout(() => navigate("/game/youdied", { replace: false }), 2000);
     // formik.setFieldValue("killCount", currentMonster.killCount + 1);
   };
 

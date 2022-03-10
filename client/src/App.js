@@ -12,6 +12,7 @@ import HighScores from "./Components/HighScores/HighScores";
 import TopMonsters from "./Components/HighScores/TopMonsters";
 import AdminLogin from "./Components/Admin/AdminLogin";
 import MonsterList from "./Components/Admin/MonsterList";
+import YouDied from "./Components/MainScreens/YouDied";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
       <Route path="/login" element={<AdminLogin />} />
       <Route path="/game" element={<Game />}>
         <Route path="battle" element={<BattleScreen />} />
-        <Route path="skills" element={<SkillSelect />} />
+        <Route path="skills" element={<SkillSelect />} />{" "}
+        <Route path="youdied" element={<YouDied />} />
         <Route path="gameover" element={<GameOver />} />
       </Route>
       <Route path="/highscores" element={<HighScores />} />
