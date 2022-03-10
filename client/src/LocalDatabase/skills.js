@@ -56,7 +56,7 @@ const monsterAttack = async (gameState) => {
   const x = gameState.currentMonster.attack;
   await gameState.setPlayerHP((prevState) => prevState - x);
   // localStorage.setItem("playerHP", JSON.stringify(gameState.playerHP - x));
-  console.log(localStorage.playerHP);
+  // console.log(localStorage.playerHP);
   const combatLogEntry = `${gameState.currentMonster.name} attacks! You took ${x} damage`;
   combatLogAdd(gameState, combatLogEntry);
   if (gameState.playerHP - x < 0) {
