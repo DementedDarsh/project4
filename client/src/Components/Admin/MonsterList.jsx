@@ -16,24 +16,21 @@ const MonsterList = () => {
       setMonsterList(killData);
     };
     getKillCount();
-  }, []);
+  }, [update]);
 
 const deleteMonster = async (url) => {
   await axios({
     method: 'DELETE',
     url: url,
   });
-  // setUpdate(prevState => !prevState);
-  navigate(`/admin/monsters`, {
-    replace: false,
-  });
+  setUpdate(prevState => !prevState);
 }
 
   const monsters = monsterList?.map((item, index) => {
     return (
      
       <table className="monsterCard" key={index}>
-        <thead><tr><td>{item.name}</td><td><button onClick={() => deleteMonster(`http://localhost:3000/api/monster/${item._id}`)}>X</button></td></tr></thead>
+        <thead><tr><td>{item.name}</td><td><button className="delete" onClick={() => deleteMonster(`http://localhost:3000/api/monster/${item._id}`)}>X</button></td></tr></thead>
         <tbody><tr><td><img src={item.imagePath} /></td></tr></tbody>
         <tfoot><tr><td>Kills: {item.killCount}</td></tr></tfoot>
       </table>

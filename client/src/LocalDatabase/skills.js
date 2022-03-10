@@ -131,7 +131,7 @@ const skills = [
             newMonsterHP = newMonsterHP - (x + critDamage);
             combatLogAdd(
               gameState,
-              `Critical Hit! You dealt ${critDamage} damage with your weapon, and an additional ${x} burn damage!`
+              `Imbue: Fire - Critical Hit! You dealt ${critDamage} damage with your weapon, and an additional ${x} burn damage!`
             );
             if (gameState.lifeSteal) {
               lifeStealOnHit(gameState, critDamage);
@@ -150,14 +150,14 @@ const skills = [
 
             combatLogAdd(
               gameState,
-              `You dealt ${damage} damage with your weapon, and an additional ${x} burn damage!`
+              `Imbue: Fire - You dealt ${damage} damage with your weapon, and an additional ${x} burn damage!`
             );
             if (gameState.lifeSteal) {
               lifeStealOnHit(gameState, damage);
             }
           }
         } else {
-          combatLogAdd(gameState, `Your attack missed!`);
+          combatLogAdd(gameState, `Imbue: Fire - Your attack missed!`);
         }
         await interval();
       }
@@ -186,7 +186,7 @@ const skills = [
 
           combatLogAdd(
             gameState,
-            `Critical Hit! You dealt ${critDamage} damage with your weapon!`
+            `Aimed Strike - Critical Hit! You dealt ${critDamage} damage with your weapon!`
           );
           if (gameState.lifeSteal) {
             lifeStealOnHit(gameState, critDamage);
@@ -199,10 +199,10 @@ const skills = [
                 gameState.currentMonster.defense
               : 0;
           await gameState.setMonsterHP((prevState) => prevState - damage);
-          newMonsterHP = newMonsterHP - (damage);
+          newMonsterHP = newMonsterHP - damage;
           combatLogAdd(
             gameState,
-            `You dealt ${damage} damage with your weapon!`
+            `Aimed Strike - You dealt ${damage} damage with your weapon!`
           );
           if (gameState.lifeSteal) {
             lifeStealOnHit(gameState, damage);
@@ -244,13 +244,13 @@ const skills = [
           }));
           combatLogAdd(
             gameState,
-            `You dealt ${damage} damage with your weapon, and destroyed ${x} points of the monster's defense`
+            `Rend Armor - You dealt ${damage} damage with your weapon, and destroyed ${x} points of the monster's defense`
           );
           if (gameState.lifeSteal) {
             lifeStealOnHit(gameState, damage);
           }
         } else {
-          combatLogAdd(gameState, `Your attack missed!`);
+          combatLogAdd(gameState, `Rend Armor - Your attack missed!`);
         }
         await interval();
       }
@@ -267,7 +267,10 @@ const skills = [
       interval();
       gameState.setLifeSteal(true);
       let newMonsterHP = gameState.monsterHP;
-      combatLogAdd(gameState, "You prepare to drain your opponent's life");
+      combatLogAdd(
+        gameState,
+        "Vampirism - You prepare to drain your opponent's life"
+      );
       await playerEnd(gameState, newMonsterHP);
     },
   },
@@ -283,7 +286,7 @@ const skills = [
         gameState.playerHP + x > 1000 ? 1000 : (prevState) => prevState + x
       );
       let newMonsterHP = gameState.monsterHP;
-      combatLogAdd(gameState, `You healed ${x} HP!`);
+      combatLogAdd(gameState, `Healing Chakra - You healed ${x} HP!`);
       await playerEnd(gameState, newMonsterHP);
     },
   },
