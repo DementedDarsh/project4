@@ -17,7 +17,7 @@ const TopMonsters = () => {
     getKillCount();
   }, []);
 
-  const sortedKills = killCountList?.sort((a, b) => b.killCount - a.killCount);
+  const sortedKills = killCountList?.sort((a, b) => b.killCount - a.killCount)
   const topMonsters = sortedKills?.slice(0, 15).map((item, index) => {
     return (
         
