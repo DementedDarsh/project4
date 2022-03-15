@@ -32,7 +32,7 @@ const SkillSelect = (props) => {
   };
 
   const handleSubmit = () => {
-    localStorage.clear();
+    localStorage.removeItem("skills");
     // console.log(chosenSkills);
     localStorage.setItem("skills", JSON.stringify(chosenSkills));
     // console.log(localStorage.skills)

@@ -6,18 +6,37 @@
 
 /*Button Stuff. */
 button {
-  margin: 20px auto;
-  width: 250px;
-  letter-spacing: 2px;
-  border-radius: 8px;
+  /* margin: 20px auto;
+  width: 250px; */
+  letter-spacing: 1px;
+  border-radius: 2px;
   font-family: "Skranji", cursive;
   color: #ffc000;
-  font-size: 18px;
+  /* font-size: 18px; */
   font-weight: 400;
   text-shadow: 0 1px 3px #000;
   text-align: center;
-  padding: 10px 0;
+  padding: 1px 10px;
   background: radial-gradient(circle, #8b0000, #8b0000);
+  border-top: 2px ridge #ffb000;
+  border-left: 2px groove #ffb000;
+  border-right: 2px ridge #ffb000;
+  border-bottom: 2px groove #ffb000;
+  box-shadow: inset 0px 0px 5px 3px rgba(1, 1, 1, 0.3);
+  position: relative;
+}
+
+button:hover:enabled {
+  background: radial-gradient(circle, #e52b2b, #8b0000);
+  box-shadow: 0px 0 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+.mainMenuButton {
+  margin: 20px auto;
+  width: 250px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border-radius: 8px;
   border-top: 4px ridge #ffb000;
   border-left: 4px groove #ffb000;
   border-right: 4px ridge #ffb000;
@@ -93,7 +112,7 @@ div {
   width: 1000px;
 }
 
-body { 
+/* body { 
   display: grid;
   grid-template-areas: 
     "header header"
@@ -105,50 +124,49 @@ body {
   grid-column-gap: 0;
   height: 100vh;
   margin: 0% auto;
-  background: linear-gradient(rgb(27, 27, 27), rgb(0, 0, 0));
+  background: linear-gradient(rgb(199, 51, 51), rgb(0, 0, 0));
     font-family: 'Skranji', cursive;
-  }  
+  }   */
 
-  input {
-    background: radial-gradient(circle, #a31919, #8b0000);
-    border-radius: 2px;
-    color: gold;
-    border-top: 2px ridge #ffb000;
-    border-left: 2px groove #ffb000;
-    border-right: 2px ridge #ffb000;
-    border-bottom: 2px groove #ffb000;
-    font-family: "Skranji", cursive;
-  }
+input {
+  background: radial-gradient(circle, #a31919, #8b0000);
+  border-radius: 2px;
+  color: gold;
+  border-top: 2px ridge #ffb000;
+  border-left: 2px groove #ffb000;
+  border-right: 2px ridge #ffb000;
+  border-bottom: 2px groove #ffb000;
+  font-family: "Skranji", cursive;
+}
 
-  .initials {
-    background: radial-gradient(circle, #a31919, #8b0000);
-    color: gold;
-    font-size: 80px;
-    height: 100px;
-    width: 180px;
-    border-top: 4px ridge #ffb000;
-    border-left: 4px groove #ffb000;
-    border-right: 4px ridge #ffb000;
-    border-bottom: 4px groove #ffb000;
-    font-family: "Skranji", cursive;
+.initialsGO {
+  background: radial-gradient(circle, #a31919, #8b0000);
+  color: gold;
+  font-size: 80px;
+  height: 100px;
+  width: 180px;
+  border-top: 4px ridge #ffb000;
+  border-left: 4px groove #ffb000;
+  border-right: 4px ridge #ffb000;
+  border-bottom: 4px groove #ffb000;
+  font-family: "Skranji", cursive;
+}
 
-  }
-
-  input::-webkit-calendar-picker-indicator {
-    display: none;
-  }
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
 
 #youDied {
-    animation: fadeInAnimation ease 3s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
-  
+
 @keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-     }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

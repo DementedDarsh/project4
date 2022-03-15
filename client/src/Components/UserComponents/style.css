@@ -1,0 +1,21 @@
+.initials {
+  background: radial-gradient(circle, #a31919, #8b0000);
+  color: gold;
+  height: 40px;
+  width: 60px;
+  font-size: 30px;
+  border-top: 2px ridge #ffb000;
+  border-left: 2px groove #ffb000;
+  border-right: 2px ridge #ffb000;
+  border-bottom: 2px groove #ffb000;
+  font-family: "Skranji", cursive;
+  margin-bottom: 20px;
+}
+
+.valid {
+  color: limegreen;
+}
+
+.invalid {
+  color: rgb(219, 28, 28);
+}

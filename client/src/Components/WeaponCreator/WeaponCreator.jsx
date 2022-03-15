@@ -226,7 +226,7 @@ const WeaponCreator = () => {
     <>
       <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
       <form onSubmit={formik.handleSubmit}>
-        <table style={{ marginLeft: "50px", marginTop: "30px" }}>
+        <table style={{ margin: "0 auto", marginTop: "30px" }}>
           <thead>
             <tr>
               <th>

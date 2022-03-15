@@ -62,7 +62,7 @@ const GameOver = () => {
     return (
       <label key={index} htmlFor={item}>
         <input
-        className="initials"
+        className="initialsGO"
           list="letters"
           name={item}
           id={item}

@@ -188,7 +188,7 @@ const MonsterCreator = () => {
   return (
     <>
     <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
-      <table style={{ marginLeft: "50px", marginTop: "30px" }}>
+      <table style={{ margin: "0 auto", marginTop: "30px" }}>
         <thead>
           <tr>
             <th>

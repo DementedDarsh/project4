@@ -4,7 +4,7 @@ const YOUR_CLOUDINARY_ID = "djtovzgnc";
 
 const ImageUpload = (props) => {
   const [displayedImage, setDisplayedImage] = useState(
-    "https://image.flaticon.com/icons/png/128/109/109612.png"
+    "https://res.cloudinary.com/djtovzgnc/image/upload/v1647291507/project4/vwmcw2wdog0ufzmihzcb.png"
   );
   const [formData, setFormData] = useState({
     // ...other fields
