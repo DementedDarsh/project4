@@ -8,7 +8,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 
-const WeaponCreator = () => {
+const WeaponCreator = (props) => {
   const navigate = useNavigate();
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
   const minimumWeaponStats = {
@@ -18,6 +18,7 @@ const WeaponCreator = () => {
     attackSpeed: 1,
     critRate: 10,
     hitRate: 20,
+    creatorID: props?.user?.userID,
   };
   const [weaponStats, setWeaponStats] = useState(minimumWeaponStats);
   const [imageUploaded, setImageUploaded] = useState(false);
@@ -32,6 +33,7 @@ const WeaponCreator = () => {
     initialValues: weaponStats,
     validationSchema: validateSchema,
     onSubmit: async (values) => {
+      await formik.setFieldValue("creatorID", props?.user?.userID)
       console.log("submitted values: ", values);
       axios({
         method: "post",
@@ -54,6 +56,7 @@ const WeaponCreator = () => {
             attackSpeed: 1,
             critRate: 10,
             hitRate: 20,
+            creatorID: props?.user?.userID,
           };
           console.log(result);
           weapon = {
@@ -64,6 +67,7 @@ const WeaponCreator = () => {
             attackSpeed: 1,
             critRate: 10,
             hitRate: 20,
+            creatorID: props?.user?.userID,
           };
           console.log(weapon);
           navigate(`/`, {

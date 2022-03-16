@@ -37,15 +37,15 @@ const logout = () => {
         <Route path="/" element={<MainScreen />} />
         <Route path="/login" element={<AdminLogin />} />
         <Route path="/game" element={<Game />}>
-          <Route path="battle" element={<BattleScreen />} />
+          <Route path="battle" element={<BattleScreen user={user} />} />
           <Route path="skills" element={<SkillSelect />} />{" "}
           <Route path="youdied" element={<YouDied />} />
           <Route path="gameover" element={<GameOver />} />
         </Route>
         <Route path="/highscores" element={<HighScores />} />
         <Route path="/topMonsters" element={<TopMonsters />} />
-        <Route path="/monster/create" element={<MonsterCreator />} />
-        <Route path="/weapon/create" element={<WeaponCreator />} />
+        <Route path="/monster/create" element={<MonsterCreator user={user} />} />
+        <Route path="/weapon/create" element={<WeaponCreator user={user} />} />
         <Route path="/admin">
           <Route path="login" element={<AdminLogin />} />
           <Route path="monsters" element={<MonsterList />} />

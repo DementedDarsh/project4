@@ -23,7 +23,9 @@ router.post("/new", async (req, res) => {
     hp: req.body.hp,
     attack: req.body.attack,
     defense: req.body.defense,
+    creatorID: req.body.creatorID,
   };
+  console.log(newMonster)
   if (!newMonster.imagePath) {
     res
       .status(400)

@@ -8,7 +8,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 
-const MonsterCreator = () => {
+const MonsterCreator = (props) => {
   //DEFINING VARIABLES
   const navigate = useNavigate();
   const [availableStatPoints, setAvailableStatPoints] = useState(20);
@@ -19,11 +19,11 @@ const MonsterCreator = () => {
     attack: 10,
     defense: 10,
     killCount: 0,
+    creatorID: props?.user?.userID,
   };
   const [monsterStats, setMonsterStats] = useState(minimumMonsterStats);
   const [message, setMessage] = useState("");
   const [imageUploaded, setImageUploaded] = useState(false);
-
   //VALIDATION
   const validateSchema = Yup.object().shape({
     imagePath: Yup.string().required("Please upload an image."),
@@ -34,6 +34,7 @@ const MonsterCreator = () => {
     initialValues: monsterStats,
     // validationSchema: validateSchema,
     onSubmit: async (values) => {
+      await formik.setFieldValue("creatorID", props.user.userID)
       console.log("submitted values: ", values);
       axios({
         method: "post",
@@ -56,6 +57,7 @@ const MonsterCreator = () => {
             attack: 0,
             defense: 0,
             killCount: 0,
+            creatorID: props?.user?.userID,
           };
           console.log(result);
           monster = {
@@ -66,6 +68,7 @@ const MonsterCreator = () => {
             attack: 0,
             defense: 0,
             killCount: 0,
+            creatorID: props?.user?.userID,
           };
           console.log(monster);
           navigate(`/`, {
@@ -198,7 +201,8 @@ const MonsterCreator = () => {
   ) : (
     <p className="invalid">Upload an image for your monster.</p>
   );
-    const statPointsCheck = availableStatPoints === 0 ? (
+  const statPointsCheck =
+    availableStatPoints === 0 ? (
       <p className="valid">All stat points spent. ✅</p>
     ) : (
       <p className="invalid">Please spend all stat points.</p>

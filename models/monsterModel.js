@@ -9,7 +9,7 @@ const monsterSchema = Schema({
   attack: { type: Number, required: true },
   defense: { type: Number, required: true },
   killCount: { type: Number, default: 0 },
-  creatorId: { type: String },
+  creatorID: { type: String, required: false },
 });
 
 const Monster = mongoose.model("Monster", monsterSchema);

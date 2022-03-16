@@ -24,6 +24,7 @@ router.post("/new", async (req, res) => {
     attackSpeed: req.body.attackSpeed,
     critRate: req.body.critRate,
     hitRate: req.body.hitRate,
+    creatorID: req.body.creatorID
   };
   if (!newWeapon.imagePath) {
     res
