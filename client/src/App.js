@@ -14,11 +14,13 @@ import AdminLogin from "./Components/Admin/AdminLogin";
 import MonsterList from "./Components/Admin/MonsterList";
 import YouDied from "./Components/MainScreens/YouDied";
 import Signup from "./Components/UserComponents/Signup";
+import Signin from "./Components/UserComponents/Signin";
 
 function App() {
   return (
     <Routes>
       <Route path="/signup" element={<Signup />} />
+      <Route path="/signin" element={<Signin />} />
       <Route path="/" element={<MainScreen />} />
       <Route path="/login" element={<AdminLogin />} />
       <Route path="/game" element={<Game />}>

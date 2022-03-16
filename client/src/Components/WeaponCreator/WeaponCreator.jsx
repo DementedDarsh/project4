@@ -20,6 +20,7 @@ const WeaponCreator = () => {
     hitRate: 20,
   };
   const [weaponStats, setWeaponStats] = useState(minimumWeaponStats);
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   const validateSchema = Yup.object().shape({
     imagePath: Yup.string().required("Please upload an image."),
@@ -222,10 +223,28 @@ const WeaponCreator = () => {
     );
   });
 
+  const nameValidation = document.querySelector("#name")?.value.length > 0;
+  const nameCheck = nameValidation ? (
+    <p className="valid">Name ✅</p>
+  ) : (
+    <p className="invalid">Enter a name for your weapon.</p>
+  );
+  const imageCheck = imageUploaded ? (
+    <p className="valid">Image ✅</p>
+  ) : (
+    <p className="invalid">Upload an image for your weapon.</p>
+  );
+    const statPointsCheck = availableStatPoints === 0 ? (
+      <p className="valid">All stat points spent. ✅</p>
+    ) : (
+      <p className="invalid">Please spend all stat points.</p>
+    );
+
+
   return (
     <>
       <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
-      <form onSubmit={formik.handleSubmit}>
+ 
         <table style={{ margin: "0 auto", marginTop: "30px" }}>
           <thead>
             <tr>
@@ -238,7 +257,7 @@ const WeaponCreator = () => {
                 </div>
               </th>
               <th>
-                <ImageUpload formik={formik} name={"imagePath"} />
+                <ImageUpload formik={formik} setImageUploaded={setImageUploaded} name={"imagePath"} />
               </th>
             </tr>
           </thead>
@@ -253,7 +272,7 @@ const WeaponCreator = () => {
               <td style={{ textAlign: "center" }}>
                 <div
                   className="statPoints"
-                  style={{ marginTop: "180px", fontSize: "40px" }}
+                  style={{ marginTop: "120px", fontSize: "40px" }}
                 >
                   <p
                     style={{
@@ -266,7 +285,11 @@ const WeaponCreator = () => {
                   </p>
                   {availableStatPoints}
                 </div>
-                <div style={{ marginTop: "150px" }}>
+                <div style={{ marginTop: "50px" }}>
+                <form onSubmit={formik.handleSubmit} formik={formik}>
+                  {nameCheck}
+                  {imageCheck}
+                  {statPointsCheck}
                   <button
                     type="submit"
                     className="buttonSubmit"
@@ -274,12 +297,13 @@ const WeaponCreator = () => {
                   >
                     Submit
                   </button>
-                </div>
+                </form>
+              </div>
               </td>
             </tr>
           </tbody>
         </table>
-      </form>
+  
       {/* <form onSubmit={formik.handleSubmit}>
         <ImageUpload formik={formik} name={"imagePath"} />
         <NameEdit handleChange={formik.handleChange} />

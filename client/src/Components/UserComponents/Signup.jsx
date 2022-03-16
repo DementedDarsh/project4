@@ -101,7 +101,7 @@ const Signup = () => {
   const usernameLengthValidation =
     document.querySelector("#username")?.value.length > 4;
   const usernameLengthCheck = usernameLengthValidation ? (
-    <p className="valid">Username is longer than 4 characters</p>
+    <p className="valid">Username is longer than 4 characters. ✅</p>
   ) : (
     <p className="invalid">Username must be longer than 4 characters.</p>
   );
@@ -110,7 +110,7 @@ const Signup = () => {
     document.querySelector("#username")?.value
   );
   const usernameUniqueCheck = usernameUniqueValidation ? (
-    <p className="valid">Username is available!</p>
+    <p className="valid">Username is available! ✅</p>
   ) : (
     <p className="invalid">Username taken.</p>
   );
@@ -118,7 +118,7 @@ const Signup = () => {
   const passwordLengthValidation =
     document.querySelector("#password")?.value.length > 4;
   const passwordLengthCheck = passwordLengthValidation ? (
-    <p className="valid">Password is longer than 4 characters</p>
+    <p className="valid">Password is longer than 4 characters. ✅</p>
   ) : (
     <p className="invalid">Password must be longer than 4 characters.</p>
   );
@@ -128,7 +128,7 @@ const Signup = () => {
     document.querySelector("#confirmPassword")?.value;
 
   const passwordMatchCheck = passwordMatchValidation ? (
-    <p className="valid">Passwords match</p>
+    <p className="valid">Passwords match. ✅</p>
   ) : (
     <p className="invalid">Passwords do not match.</p>
   );

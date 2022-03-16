@@ -26,6 +26,7 @@ const ImageUpload = (props) => {
     const img = await res.json();
     setDisplayedImage(img.secure_url);
     props.formik.setFieldValue(props.name, img.secure_url);
+    props.setImageUploaded(true)
     console.log(img);
     return img.secure_url;
   };

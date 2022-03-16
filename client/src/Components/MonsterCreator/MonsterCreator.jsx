@@ -22,6 +22,7 @@ const MonsterCreator = () => {
   };
   const [monsterStats, setMonsterStats] = useState(minimumMonsterStats);
   const [message, setMessage] = useState("");
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   //VALIDATION
   const validateSchema = Yup.object().shape({
@@ -185,9 +186,29 @@ const MonsterCreator = () => {
     );
   });
 
+  //VALIDATIONS
+  const nameValidation = document.querySelector("#name")?.value.length > 0;
+  const nameCheck = nameValidation ? (
+    <p className="valid">Name ✅</p>
+  ) : (
+    <p className="invalid">Enter a name for your monster.</p>
+  );
+  const imageCheck = imageUploaded ? (
+    <p className="valid">Image ✅</p>
+  ) : (
+    <p className="invalid">Upload an image for your monster.</p>
+  );
+    const statPointsCheck = availableStatPoints === 0 ? (
+      <p className="valid">All stat points spent. ✅</p>
+    ) : (
+      <p className="invalid">Please spend all stat points.</p>
+    );
+
   return (
     <>
-    <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
+      <Link to={`/`}>
+        <button className="buttonSubmit">Back</button>
+      </Link>
       <table style={{ margin: "0 auto", marginTop: "30px" }}>
         <thead>
           <tr>
@@ -200,7 +221,11 @@ const MonsterCreator = () => {
               </div>
             </th>
             <th>
-              <ImageUpload formik={formik} name={"imagePath"} />
+              <ImageUpload
+                formik={formik}
+                setImageUploaded={setImageUploaded}
+                name={"imagePath"}
+              />
             </th>
           </tr>
         </thead>
@@ -228,8 +253,11 @@ const MonsterCreator = () => {
                 </p>
                 {availableStatPoints}
               </div>
-              <div style={{ marginTop: "140px" }}>
+              <div style={{ marginTop: "50px" }}>
                 <form onSubmit={formik.handleSubmit} formik={formik}>
+                  {nameCheck}
+                  {imageCheck}
+                  {statPointsCheck}
                   <button
                     type="submit"
                     className="buttonSubmit"
