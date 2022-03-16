@@ -9,6 +9,7 @@ const weaponSchema = Schema({
   attackSpeed: { type: Number, required: true },    
   critRate: { type: Number, required: true },  
   hitRate: { type: Number, required: true },  
+  creatorId: { type: String },
 });
 
 const Weapon = mongoose.model("Weapon", weaponSchema);
