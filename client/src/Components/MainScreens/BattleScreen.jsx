@@ -15,7 +15,7 @@ import ReactTooltip from "react-tooltip";
 import { skills } from "../../LocalDatabase/skills";
 import { useNavigate } from "react-router-dom";
 
-const BattleScreen = () => {
+const BattleScreen = (props) => {
   const [monsters, setMonsters] = useState([]);
   const [weapons, setWeapons] = useState([]);
   const [currentMonster, setCurrentMonster] = useState("TEST");
@@ -47,18 +47,20 @@ const BattleScreen = () => {
         await axios.get("/api/monster/monsters")
       ).data.data;
       //   console.log(monsterData);
-      setMonsters(monsterData);
-      const random = Math.floor(Math.random() * monsterData.length);
-      setCurrentMonster(monsterData[random]);
-      setMonsterHP(monsterData[random].hp);
+      const filteredMonsters = monsterData?.filter((item) => item.creatorID === props.user.userID || item.creatorID === undefined )
+      setMonsters(filteredMonsters);
+      const random = Math.floor(Math.random() * filteredMonsters.length);
+      setCurrentMonster(filteredMonsters[random]);
+      setMonsterHP(filteredMonsters[random].hp);
     };
     const getWeapons = async () => {
       const weaponData = await (
         await axios.get("/api/weapon/weapons")
       ).data.data;
-      setWeapons(weaponData);
+      const filteredWeapons = weaponData?.filter((item) => item.creatorID === props.user.userID || item.creatorID === undefined )
+      setWeapons(filteredWeapons);
       setCurrentWeapon(
-        weaponData[Math.floor(Math.random() * weaponData.length)]
+        filteredWeapons[Math.floor(Math.random() * filteredWeapons.length)]
       );
     };
 
@@ -126,9 +128,9 @@ const BattleScreen = () => {
   return (
     <table style={{ width: "100%", height: "100%", marginLeft: "30px" }}>
       <thead>
-        <tr>
+        {/* <tr>
           <th colSpan="2">TITLE</th>
-        </tr>
+        </tr> */}
       </thead>
       <tbody>
         <tr style={{ height: "550px" }}>
