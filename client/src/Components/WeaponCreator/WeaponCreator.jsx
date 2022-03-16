@@ -234,58 +234,64 @@ const WeaponCreator = () => {
   ) : (
     <p className="invalid">Upload an image for your weapon.</p>
   );
-    const statPointsCheck = availableStatPoints === 0 ? (
+  const statPointsCheck =
+    availableStatPoints === 0 ? (
       <p className="valid">All stat points spent. ✅</p>
     ) : (
       <p className="invalid">Please spend all stat points.</p>
     );
 
-
   return (
     <>
-      <Link to={`/`}><button className="buttonSubmit">Back</button></Link>
- 
-        <table style={{ margin: "0 auto", marginTop: "30px" }}>
-          <thead>
-            <tr>
-              <th>
-                <p style={{ fontSize: "40px", marginTop: "85px" }}>
-                  Create a weapon!
-                </p>
-                <div style={{ marginTop: "80px", textAlign: "left" }}>
-                  <NameEdit handleChange={formik.handleChange} />
-                </div>
-              </th>
-              <th>
-                <ImageUpload formik={formik} setImageUploaded={setImageUploaded} name={"imagePath"} />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                {" "}
-                <table>
-                  <tbody>{statEditMap}</tbody>
-                </table>
-              </td>
-              <td style={{ textAlign: "center" }}>
-                <div
-                  className="statPoints"
-                  style={{ marginTop: "120px", fontSize: "40px" }}
+      <Link to={`/`}>
+        <button className="buttonSubmit">Back</button>
+      </Link>
+
+      <table style={{ margin: "0 auto", marginTop: "30px" }}>
+        <thead>
+          <tr>
+            <th>
+              <p style={{ fontSize: "40px", marginTop: "85px" }}>
+                Create a weapon!
+              </p>
+              <div style={{ marginTop: "80px", textAlign: "left" }}>
+                <NameEdit handleChange={formik.handleChange} />
+              </div>
+            </th>
+            <th>
+              <ImageUpload
+                formik={formik}
+                setImageUploaded={setImageUploaded}
+                name={"imagePath"}
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {" "}
+              <table>
+                <tbody>{statEditMap}</tbody>
+              </table>
+            </td>
+            <td style={{ textAlign: "center" }}>
+              <div
+                className="statPoints"
+                style={{ marginTop: "120px", fontSize: "40px" }}
+              >
+                <p
+                  style={{
+                    fontSize: "15px",
+                    marginTop: "5px",
+                    marginBottom: "-8px",
+                  }}
                 >
-                  <p
-                    style={{
-                      fontSize: "15px",
-                      marginTop: "5px",
-                      marginBottom: "-8px",
-                    }}
-                  >
-                    Stat Points:{" "}
-                  </p>
-                  {availableStatPoints}
-                </div>
-                <div style={{ marginTop: "50px" }}>
+                  Stat Points:{" "}
+                </p>
+                {availableStatPoints}
+              </div>
+              <div style={{ marginTop: "50px" }}>
                 <form onSubmit={formik.handleSubmit} formik={formik}>
                   {nameCheck}
                   {imageCheck}
@@ -299,11 +305,11 @@ const WeaponCreator = () => {
                   </button>
                 </form>
               </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       {/* <form onSubmit={formik.handleSubmit}>
         <ImageUpload formik={formik} name={"imagePath"} />
         <NameEdit handleChange={formik.handleChange} />

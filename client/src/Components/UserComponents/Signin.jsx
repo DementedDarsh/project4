@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { DataContext } from "../../App";
 
-const Signin = () => {
+const Signin = (props) => {
   const navigate = useNavigate();
   //   const [userContext, setUserContext] = useContext(DataContext);
   const [message, setMessage] = useState("");
@@ -48,9 +48,10 @@ const Signin = () => {
             initialC: result.initialC,
           };
           console.log(user);
-          localStorage.setItem("currentUser", JSON.stringify(user));
+          localStorage.setItem("currentUser", JSON.stringify(user))
           //   setUserContext(user);
-          navigate(-1, { replace: false });
+          props.setUser(user)
+         navigate("/", { replace: false })
         }
       });
     },

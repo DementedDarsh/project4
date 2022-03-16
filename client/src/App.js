@@ -15,29 +15,44 @@ import MonsterList from "./Components/Admin/MonsterList";
 import YouDied from "./Components/MainScreens/YouDied";
 import Signup from "./Components/UserComponents/Signup";
 import Signin from "./Components/UserComponents/Signin";
+import ProtectedRoute from "./Components/UserComponents/ProtectedRoute";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("currentUser")));
+  console.log(user);
+const logout = () => {
+  localStorage.removeItem("currentUser");
+  setUser(undefined);
+}
+
   return (
+    <>
+    <p>Current User: {user?.username}</p>
+    <button onClick={logout}>Logout</button>
     <Routes>
       <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/" element={<MainScreen />} />
-      <Route path="/login" element={<AdminLogin />} />
-      <Route path="/game" element={<Game />}>
-        <Route path="battle" element={<BattleScreen />} />
-        <Route path="skills" element={<SkillSelect />} />{" "}
-        <Route path="youdied" element={<YouDied />} />
-        <Route path="gameover" element={<GameOver />} />
-      </Route>
-      <Route path="/highscores" element={<HighScores />} />
-      <Route path="/topMonsters" element={<TopMonsters />} />
-      <Route path="/monster/create" element={<MonsterCreator />} />
-      <Route path="/weapon/create" element={<WeaponCreator />} />
-      <Route path="/admin">
-        <Route path="login" element={<AdminLogin />} />
-        <Route path="monsters" element={<MonsterList />} />
+      <Route path="/signin" element={<Signin setUser={setUser}/>} />
+      <Route element={<ProtectedRoute user={user} />}>
+        <Route path="/" element={<MainScreen />} />
+        <Route path="/login" element={<AdminLogin />} />
+        <Route path="/game" element={<Game />}>
+          <Route path="battle" element={<BattleScreen />} />
+          <Route path="skills" element={<SkillSelect />} />{" "}
+          <Route path="youdied" element={<YouDied />} />
+          <Route path="gameover" element={<GameOver />} />
+        </Route>
+        <Route path="/highscores" element={<HighScores />} />
+        <Route path="/topMonsters" element={<TopMonsters />} />
+        <Route path="/monster/create" element={<MonsterCreator />} />
+        <Route path="/weapon/create" element={<WeaponCreator />} />
+        <Route path="/admin">
+          <Route path="login" element={<AdminLogin />} />
+          <Route path="monsters" element={<MonsterList />} />
+        </Route>
       </Route>
     </Routes>
+    </>
   );
 }
 

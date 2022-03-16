@@ -72,6 +72,7 @@ const Signup = () => {
           window.alert(newMsg);
           // setIsUpdatedData(false);
           // setUserContext(user);
+          navigate("/", { replace: false })
         }
       });
     },
