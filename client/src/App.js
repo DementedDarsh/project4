@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import MonsterCreator from "./Components/MonsterCreator/MonsterCreator";
-import { Routes, Route, Navigate, useSearchParams } from "react-router-dom";
+import { Routes, Route, Navigate, useSearchParams, Link } from "react-router-dom";
 import WeaponCreator from "./Components/WeaponCreator/WeaponCreator";
 import MainScreen from "./Components/MainScreens/MainMenu";
 import BattleScreen from "./Components/MainScreens/BattleScreen";
@@ -17,6 +17,9 @@ import Signup from "./Components/UserComponents/Signup";
 import Signin from "./Components/UserComponents/Signin";
 import ProtectedRoute from "./Components/UserComponents/ProtectedRoute";
 import { useState } from "react";
+import UserCreations from "./Components/UserComponents/UserCreations";
+import UserMonsters from "./Components/UserComponents/UserMonsters";
+import UserWeapons from "./Components/UserComponents/UserWeapons";
 
 function App() {
   const [user, setUser] = useState(
@@ -38,8 +41,17 @@ function App() {
           width: "100%",
         }}
       >
-        <p>Current User: {user?.username}</p>
-        <button onClick={logout} style={{height: "40px"}}>Logout</button>
+  
+          <p>Current User: {user?.username}</p>
+      <span>
+        <Link to={`/users`}>
+            <button style={{ height: "40px" }}>
+              Creations
+            </button>
+          </Link>
+        <button onClick={logout} style={{ height: "40px" }}>
+          Logout
+        </button></span>
       </div>
       <Routes>
         <Route path="/signup" element={<Signup />} />
@@ -51,7 +63,11 @@ function App() {
             <Route path="battle" element={<BattleScreen user={user} />} />
             <Route path="skills" element={<SkillSelect />} />{" "}
             <Route path="youdied" element={<YouDied />} />
-            <Route path="gameover" element={<GameOver user={user}/>} />
+            <Route path="gameover" element={<GameOver user={user} />} />
+          </Route>
+          <Route path="/users" element={<UserCreations />}>
+            <Route path="monsters" element={<UserMonsters user={user} />} />
+            <Route path="weapons" element={<UserWeapons user={user} />} />{" "}
           </Route>
           <Route path="/highscores" element={<HighScores />} />
           <Route path="/topMonsters" element={<TopMonsters />} />
