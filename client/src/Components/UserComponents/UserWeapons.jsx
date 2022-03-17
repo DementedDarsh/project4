@@ -29,7 +29,7 @@ const filteredWeapons = weaponList?.filter((item) => item.creatorID === props.us
   const weapons = filteredWeapons?.map((item, index) => {
     return (
       <table className="monsterCard" key={index}>
-        <thead><tr><td>{item.name}</td><td><button className="delete" onClick={() => deleteWeapon(`/api/monster/${item._id}`)}>X</button></td></tr></thead>
+        <thead><tr><td>{item.name}</td><td><button className="delete" onClick={() => deleteWeapon(`/api/weapon/${item._id}`)}>X</button></td></tr></thead>
         <tbody><tr><td colSpan="2"><img src={item.imagePath} style={{height: "150px", width: "auto"}} alt="weapon"/></td></tr></tbody>
       </table>
     );
