@@ -18,11 +18,11 @@ const HighScores = () => {
   const highScores = sortedScores?.slice(0,20) .map((item, index) => {
     return (
       <tr key={index}>
-        <td classname="score" style={{fontSize: "40px"}}>{index+1}</td>
-        <td classname="score" style={{fontSize: "40px"}}>{item.initialA}</td>
-        <td classname="score" style={{fontSize: "40px"}}>{item.initialB}</td>
-        <td classname="score" style={{fontSize: "40px"}}>{item.initialC}</td>
-        <td classname="score" style={{fontSize: "40px"}}>{item.score}</td>
+        <td className="score" style={{fontSize: "40px"}}>{index+1}</td>
+        <td className="score" style={{fontSize: "40px"}}>{item.initialA}</td>
+        <td className="score" style={{fontSize: "40px"}}>{item.initialB}</td>
+        <td className="score" style={{fontSize: "40px"}}>{item.initialC}</td>
+        <td className="score" style={{fontSize: "40px"}}>{item.score}</td>
       </tr>
     );
   });

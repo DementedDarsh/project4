@@ -4,7 +4,7 @@ import axios from "axios";
 import "./style.css";
 import { useOutletContext, useNavigate } from "react-router-dom";
 
-const GameOver = () => {
+const GameOver = (props) => {
   const navigate = useNavigate();
   const [level, setLevel] = useOutletContext();
   const formik = useFormik({
@@ -66,6 +66,7 @@ const GameOver = () => {
           list="letters"
           name={item}
           id={item}
+          value={props.user[item]}
           maxLength={1}
           onChange={formik.handleChange}
           pattern="[A-Z]{1}"
@@ -75,7 +76,7 @@ const GameOver = () => {
   });
 
   return (
-    <form>
+    <form styles={{margin: "0 auto"}}>
       <div>
         <p>Game Over!</p>
         <p>Enter your initials:</p>

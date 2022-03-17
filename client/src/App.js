@@ -51,7 +51,7 @@ function App() {
             <Route path="battle" element={<BattleScreen user={user} />} />
             <Route path="skills" element={<SkillSelect />} />{" "}
             <Route path="youdied" element={<YouDied />} />
-            <Route path="gameover" element={<GameOver />} />
+            <Route path="gameover" element={<GameOver user={user}/>} />
           </Route>
           <Route path="/highscores" element={<HighScores />} />
           <Route path="/topMonsters" element={<TopMonsters />} />
