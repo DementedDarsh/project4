@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
-const PASSWORD = process.env.PASSWORD;
+// const PASSWORD = process.env.PASSWORD;
 
 //* sessions on log in
 router.post("/login", async (req, res) => {

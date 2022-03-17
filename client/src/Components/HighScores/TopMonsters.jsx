@@ -29,7 +29,7 @@ const TopMonsters = () => {
         <tbody>
           <tr>
             <td>
-              <img src={item.imagePath} />
+              <img src={item.imagePath} alt="monster"/>
             </td>
           </tr>
         </tbody>

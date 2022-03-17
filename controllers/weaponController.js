@@ -43,4 +43,21 @@ router.post("/new", async (req, res) => {
   }
 });
 
+//* delete weapon
+router.delete("/:weaponID", async (req, res) => {
+  const { weaponID } = req.params;
+  // const user = req.session.currentUser;
+  try {
+    // const findweapon = await weapon.findById(weaponID);
+    const deletedWeapon = await Weapon.findByIdAndDelete(weaponID);
+    res.status(200).json({
+      status: "ok",
+      message: "deleted weapon",
+      data: deletedWeapon,
+    });
+  } catch (error) {
+    res.json({ status: "not ok", message: error.message });
+  }
+});
+
 module.exports = router;

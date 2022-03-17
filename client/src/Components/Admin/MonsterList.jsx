@@ -30,7 +30,7 @@ const deleteMonster = async (url) => {
     return (
      
       <table className="monsterCard" key={index}>
-        <thead><tr><td>{item.name}</td><td><button className="delete" onClick={() => deleteMonster(`http://localhost:3000/api/monster/${item._id}`)}>X</button></td></tr></thead>
+        <thead><tr><td>{item.name}</td><td><button className="delete" onClick={() => deleteMonster(`/api/monster/${item._id}`)}>X</button></td></tr></thead>
         <tbody><tr><td><img src={item.imagePath} /></td></tr></tbody>
         <tfoot><tr><td>Kills: {item.killCount}</td></tr></tfoot>
       </table>

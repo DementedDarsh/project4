@@ -43,7 +43,7 @@ router.post("/new", async (req, res) => {
   }
 });
 
-//* delete image post
+//* delete monster
 router.delete("/:monsterID", async (req, res) => {
   const { monsterID } = req.params;
   // const user = req.session.currentUser;

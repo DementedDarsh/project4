@@ -1,13 +1,12 @@
 import { forwardRef, useEffect, useState, useContext } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
 import axios from "axios";
 import "./style.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [submitDisabled, setSubmitDisabled] = useState();
+  //   const [submitDisabled, setSubmitDisabled] = useState();
   //   const [userContext, setUserContext] = useContext(DataContext);
   //   const [isUpdatedData, setIsUpdatedData] = useContext(DatabaseStatus);
   const [allUsernames, setAllUsernames] = useState([]);
@@ -72,7 +71,7 @@ const Signup = () => {
           window.alert(newMsg);
           // setIsUpdatedData(false);
           // setUserContext(user);
-          navigate("/", { replace: false })
+          navigate("/", { replace: false });
         }
       });
     },
@@ -138,11 +137,12 @@ const Signup = () => {
     !usernameLengthValidation ||
     !passwordMatchValidation ||
     !passwordLengthValidation ||
-    !usernameUniqueValidation
+    !usernameUniqueValidation;
 
   return (
     <div>
-      <div><h1>Sign Up</h1>
+      <div>
+        <h1>Sign Up</h1>
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="username">Username: </label>
           <input

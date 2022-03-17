@@ -2,7 +2,7 @@ import "./style.css";
 import React, { useState } from "react";
 import NameEdit from "../SharedComponents/NameEdit";
 import StatEdit from "../SharedComponents/StatEdit";
-import { useFormik, Formik } from "formik";
+import { useFormik } from "formik";
 import ImageUpload from "../SharedComponents/ImageUpload";
 import axios from "axios";
 import * as Yup from "yup";

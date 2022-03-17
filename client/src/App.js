@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import MonsterCreator from "./Components/MonsterCreator/MonsterCreator";
-import { Routes, Route, Navigate, useSearchParams, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import WeaponCreator from "./Components/WeaponCreator/WeaponCreator";
 import MainScreen from "./Components/MainScreens/MainMenu";
 import BattleScreen from "./Components/MainScreens/BattleScreen";
